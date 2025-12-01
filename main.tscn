@@ -3013,7 +3013,6 @@ sources/1 = SubResource("TileSetAtlasSource_ycdy4")
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(225, 119)
 scale = Vector2(0.5, 0.5)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -3032,16 +3031,9 @@ position = Vector2(225, 119)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("13_ycdy4")
 
-[node name="Control" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -450.0
-offset_top = -238.0
-offset_right = -410.0
-offset_bottom = -198.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="FPS Counter" type="Label" parent="Camera2D/Control"]
-layout_mode = 0
+[node name="FPS Counter" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("14_w48qg")
