@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcb3isip6kqtw"]
+
+[ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://player/Sprite-0001.png" id="1_4flbx"]
+
+[sub_resource type="GDScript" id="GDScript_oul6g"]
+script/source = "class_name Player extends CharacterBody2D
+
+var move_speed : float = 100.0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	
+	var  direction : Vector2 = Vector2.ZERO
+	direction.x = Input.get_axis(\"left\", \"right\")
+	direction.y = Input.get_axis(\"up\", \"down\")
+	direction = direction.normalized()
+	
+	velocity = direction * move_speed
+	
+func _physics_process(delta: float) -> void:
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = SubResource("GDScript_oul6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7dm0k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4flbx")
