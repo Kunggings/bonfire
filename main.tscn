@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=7 format=4 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://player/player.tscn" id="1_ig7tw"]
 [ext_resource type="TileSet" uid="uid://dqk8rlrty2f5o" path="res://BasicTileSet.tres" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://progress_bar.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://bonfire.tscn" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://coyp04kua7tru" path="res://SubCamera.gd" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://fps_counter.gd" id="14_w48qg"]
@@ -13,17 +14,31 @@ z_index = 1
 position = Vector2(319, 108)
 scale = Vector2(0.5, 0.5)
 
+[node name="HealthDrainTimer" type="Timer" parent="Player"]
+autostart = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(225, 119)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("13_ycdy4")
 
-[node name="FPS Counter" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="FPS Counter" type="Label" parent="FPS Counter"]
+[node name="FPS Counter" type="Label" parent="UI"]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("14_w48qg")
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 27.0
+grow_horizontal = 2
+script = ExtResource("4_7mycd")
+player = NodePath("../../Player")
 
 [node name="CollisionBoarder" type="StaticBody2D" parent="."]
 collision_layer = 2
