@@ -46,4 +46,10 @@ tile_map_data = PackedByteArray("AAAHAAQAAgAFAAAAAAAHAAUAAgAFAAEAAAAPAAQAAgAFAAA
 tile_set = ExtResource("4_1bvp3")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.22670749, 0.22670749, 0.22670746, 1)
+color = Color(0.27022192, 0.27022192, 0.2702219, 1)
+
+[node name="Bonfire2" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(756, 143)
+
+[node name="Bonfire3" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(-57, 143)
