@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=9 format=4 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://player/player.tscn" id="1_ig7tw"]
 [ext_resource type="TileSet" uid="uid://dqk8rlrty2f5o" path="res://BasicTileSet.tres" id="4_1bvp3"]
@@ -6,6 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://bonfire.tscn" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://coyp04kua7tru" path="res://SubCamera.gd" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://fps_counter.gd" id="14_w48qg"]
+
+[sub_resource type="Gradient" id="Gradient_7mycd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_272bh"]
+gradient = SubResource("Gradient_7mycd")
+width = 419
+height = 16
 
 [node name="Main" type="Node2D"]
 
@@ -29,7 +37,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("14_w48qg")
 
-[node name="ProgressBar" type="ProgressBar" parent="UI"]
+[node name="ProgressBar" type="TextureProgressBar" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -37,6 +45,7 @@ offset_left = -2.0
 offset_right = 2.0
 offset_bottom = 27.0
 grow_horizontal = 2
+texture_progress = SubResource("GradientTexture2D_272bh")
 script = ExtResource("4_7mycd")
 player = NodePath("../../Player")
 
