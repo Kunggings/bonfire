@@ -1,12 +1,12 @@
 extends TextureProgressBar
 
-@export var player: NodePath 
+@export var player: NodePath
 
 var player_ref
 
 func _ready() -> void:
 	player_ref = get_node(player)
-	max_value = 100  
+	max_value = 100
 
 
 func _physics_process(delta: float) -> void:

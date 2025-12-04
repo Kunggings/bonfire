@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwiyxqbqtokc3"
-path="res://.godot/imported/TX Props with Shadow.png-3dcfd83e7708ae41ec76329c4038a946.ctex"
+uid="uid://de5d1xv24xonf"
+path="res://.godot/imported/TX Struct.png-4829cee216ad1ace7403e253127983e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileMap/Pixel Art Top Down - Basic v1.2.2/Texture/Extra/TX Props with Shadow.png"
-dest_files=["res://.godot/imported/TX Props with Shadow.png-3dcfd83e7708ae41ec76329c4038a946.ctex"]
+source_file="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Struct.png"
+dest_files=["res://.godot/imported/TX Struct.png-4829cee216ad1ace7403e253127983e2.ctex"]
 
 [params]
 

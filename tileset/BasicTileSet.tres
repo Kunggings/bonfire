@@ -1,11 +1,11 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dqk8rlrty2f5o"]
 
-[ext_resource type="Texture2D" uid="uid://3xvtuajexbhg" path="res://TileMap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Grass.png" id="1_h3dhr"]
-[ext_resource type="Texture2D" uid="uid://p2ksok348wtt" path="res://TileMap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Wall.png" id="2_i7d0b"]
-[ext_resource type="Texture2D" uid="uid://rxt8undido15" path="res://TileMap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Props.png" id="3_i7d0b"]
+[ext_resource type="Texture2D" uid="uid://3xvtuajexbhg" path="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Grass.png" id="1_i7d0b"]
+[ext_resource type="Texture2D" uid="uid://p2ksok348wtt" path="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Wall.png" id="2_2hs40"]
+[ext_resource type="Texture2D" uid="uid://rxt8undido15" path="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Props.png" id="3_ku3v2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2hs40"]
-texture = ExtResource("1_h3dhr")
+texture = ExtResource("1_i7d0b")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -73,7 +73,7 @@ texture_region_size = Vector2i(32, 32)
 7:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ku3v2"]
-texture = ExtResource("2_i7d0b")
+texture = ExtResource("2_2hs40")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 2:1/0 = 0
@@ -138,7 +138,7 @@ texture_region_size = Vector2i(32, 32)
 5:10/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x5vd3"]
-texture = ExtResource("3_i7d0b")
+texture = ExtResource("3_ku3v2")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 5:0/0 = 0

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var lit_texture := preload("res://bonfire.png")
+@export var lit_texture := preload("res://textures/bonfire.png")
 @export var heal_amount: float = 10.0
 
 var light_flicker_enabled := false

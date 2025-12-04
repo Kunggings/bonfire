@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7twogww0m64t"
-path="res://.godot/imported/emptyBonfire.png-12e3d055323a3b74b6b8c5462f5f7e3e.ctex"
+uid="uid://cn4qj6ihx47n8"
+path="res://.godot/imported/TX Player.png-d7b7a37bc48e124b4139a93712068dc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://emptyBonfire.png"
-dest_files=["res://.godot/imported/emptyBonfire.png-12e3d055323a3b74b6b8c5462f5f7e3e.ctex"]
+source_file="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Player.png"
+dest_files=["res://.godot/imported/TX Player.png-d7b7a37bc48e124b4139a93712068dc4.ctex"]
 
 [params]
 

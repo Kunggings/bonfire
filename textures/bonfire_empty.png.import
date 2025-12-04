@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3p26vy177sky"
-path="res://.godot/imported/TX Shadow.png-e588ea52ddac1ea38d79548f6c16f8be.ctex"
+uid="uid://7twogww0m64t"
+path="res://.godot/imported/bonfire_empty.png-d5ab60dc966e273b27bd333cf9e17c3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileMap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Shadow.png"
-dest_files=["res://.godot/imported/TX Shadow.png-e588ea52ddac1ea38d79548f6c16f8be.ctex"]
+source_file="res://textures/bonfire_empty.png"
+dest_files=["res://.godot/imported/bonfire_empty.png-d5ab60dc966e273b27bd333cf9e17c3b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj5siepja67aa"
-path="res://.godot/imported/bonfire.png-3c6846e34f3675936e1264497e4d3e6d.ctex"
+uid="uid://p2ksok348wtt"
+path="res://.godot/imported/TX Tileset Wall.png-3fb65f9374bb7beee41e8d8817254d06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bonfire.png"
-dest_files=["res://.godot/imported/bonfire.png-3c6846e34f3675936e1264497e4d3e6d.ctex"]
+source_file="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Wall.png"
+dest_files=["res://.godot/imported/TX Tileset Wall.png-3fb65f9374bb7beee41e8d8817254d06.ctex"]
 
 [params]
 
