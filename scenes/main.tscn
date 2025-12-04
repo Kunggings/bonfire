@@ -58,9 +58,6 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBoarder"]
 polygon = PackedVector2Array(2, 0, -192, -1, -196, 289, 833, 289, 832, -1, 2, 0, 8, -65, 886, -83, 881, 435, -245, 416, -228, -58, 10, -65)
 
-[node name="Bonfire" parent="." instance=ExtResource("5_choun")]
-position = Vector2(335, 216)
-
 [node name="TileMap" type="Node" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
@@ -74,8 +71,13 @@ tile_set = ExtResource("6_ya4ey")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.047401495, 0.066622205, 0.08994489, 1)
 
-[node name="Bonfire2" parent="." instance=ExtResource("5_choun")]
+[node name="Bonfires" type="Node" parent="."]
+
+[node name="Bonfire2" parent="Bonfires" instance=ExtResource("5_choun")]
 position = Vector2(756, 143)
 
-[node name="Bonfire3" parent="." instance=ExtResource("5_choun")]
+[node name="Bonfire3" parent="Bonfires" instance=ExtResource("5_choun")]
 position = Vector2(-57, 143)
+
+[node name="Bonfire" parent="Bonfires" instance=ExtResource("5_choun")]
+position = Vector2(335, 216)
