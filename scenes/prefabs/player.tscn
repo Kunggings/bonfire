@@ -1,43 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
-
-[sub_resource type="GDScript" id="GDScript_oul6g"]
-script/source = "class_name Player
-extends CharacterBody2D
-
-@export var move_speed: float = 100.0
-
-@export var max_health: float = 100.0
-@export var current_health: float = 100.0
-
-@export var health_drain_per_second: float = 1.0  # How much health to lose every tick
-
-
-func _ready() -> void:
-	# Connect the timer signal
-	$HealthDrainTimer.timeout.connect(_on_health_drain_timer_timeout)
-
-
-func _process(delta: float) -> void:
-	# Movement input
-	var direction: Vector2 = Vector2.ZERO
-	direction.x = Input.get_axis(\"left\", \"right\")
-	direction.y = Input.get_axis(\"up\", \"down\")
-	direction = direction.normalized()
-
-	velocity = direction * move_speed
-
-
-func _physics_process(delta: float) -> void:
-	move_and_slide()
-
-
-func _on_health_drain_timer_timeout() -> void:
-	# Reduce health each time the timer triggers
-	current_health -= health_drain_per_second
-	current_health = clamp(current_health, 0, max_health)
-"
+[ext_resource type="Script" uid="uid://biaqp0lcnatka" path="res://scripts/player_new.gd" id="1_tou0u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -48,7 +12,7 @@ polygon = PackedVector2Array(-25, -25, -25, 25, 25, 25, 25, -25)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 motion_mode = 1
-script = SubResource("GDScript_oul6g")
+script = ExtResource("1_tou0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7dm0k")
@@ -58,3 +22,9 @@ texture = ExtResource("1_4flbx")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+top_level = true
+
+[node name="HealthDrainTimer" type="Timer" parent="."]
+autostart = true

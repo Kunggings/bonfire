@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://23w0l2ox22f4"]
 
-[ext_resource type="Script" uid="uid://dspj5vll4v1aw" path="res://scripts/coin.gd" id="1_rrxl2"]
+[ext_resource type="Script" uid="uid://b8yvnqi01y1p0" path="res://scripts/bonfire.gd" id="1_7cyym"]
 [ext_resource type="Texture2D" uid="uid://7twogww0m64t" path="res://textures/bonfire_empty.png" id="2_wfoe5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vw27"]
@@ -19,7 +19,7 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Bonfire" type="Area2D"]
 z_index = 1
 collision_layer = 4
-script = ExtResource("1_rrxl2")
+script = ExtResource("1_7cyym")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.04, 0.04)

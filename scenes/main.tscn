@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=8 format=4 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/prefabs/player.tscn" id="1_tefeu"]
-[ext_resource type="Script" uid="uid://coyp04kua7tru" path="res://scripts/SubCamera.gd" id="2_o6xl0"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://scripts/progress_bar.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/prefabs/bonfire.tscn" id="5_choun"]
@@ -21,16 +20,6 @@ height = 16
 z_index = 1
 position = Vector2(319, 108)
 scale = Vector2(0.5, 0.5)
-
-[node name="HealthDrainTimer" type="Timer" parent="Player"]
-autostart = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(225, 119)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("2_o6xl0")
-zoom_in_amount = 2.0
-zoom_out_amount = 1.5
 
 [node name="UI" type="CanvasLayer" parent="."]
 
