@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is not Player and !bonfire_lit:
+	if body is not Player or bonfire_lit:
 		return
 
 	bonfire_lit = true

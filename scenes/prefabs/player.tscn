@@ -28,3 +28,5 @@ top_level = true
 
 [node name="HealthDrainTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
