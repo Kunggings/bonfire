@@ -1,9 +1,10 @@
 extends Area2D
 
 @export var lit_texture := preload("res://bonfire.png")
-@export var heal_amount: float = 10.0   # <<< how much health the fire gives
+@export var heal_amount: float = 10.0
 
 var light_flicker_enabled := false
+var bonfire_lit := false   # <<< changed to bonfire_lit
 
 
 func _process(delta: float) -> void:
@@ -12,22 +13,24 @@ func _process(delta: float) -> void:
 
 
 func flicker() -> void:
-	var tween := create_tween()
-	var new_energy := randf_range(0.7, 1.3)
-	tween.tween_property($FlameLight, "energy", new_energy, 0.1)
-	
-	#-----OLD METHOD
-	#var target := randf_range(0.5, 1.3)
-	#$FlameLight.energy = lerp($FlameLight.energy, target, 0.1)
+	var target := randf_range(0.7, 1.3)
+	$FlameLight.energy = lerp($FlameLight.energy, target, 0.1)
 
 
 func _on_body_entered(body: Node2D) -> void:
+	# Only allow the bonfire to activate once
+	if bonfire_lit:
+		return
+
+	bonfire_lit = true  
+
 	print("Bonfire")
 
-	# ----- Heal the player -----
+	# Heal the player
+	
 	body.current_health = min(body.current_health + heal_amount, body.max_health)
 
-	# ----- Visuals -----
+	# Visuals
 	$Sprite.texture = lit_texture
 	$FlameLight.visible = true
 	light_flicker_enabled = true

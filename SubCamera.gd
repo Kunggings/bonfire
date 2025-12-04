@@ -1,7 +1,7 @@
 extends Camera2D
 
 @export var zoom_in_amount: float = 1.0      # Zoom when still
-@export var zoom_out_amount: float = 0.8     # Zoom when moving
+@export var zoom_out_amount: float = 1     # Zoom when moving
 @export var zoom_speed: float = 3.0          # Speed of zoom change
 @export var move_threshold: float = 10.0     # How much movement counts as "moving"
 
