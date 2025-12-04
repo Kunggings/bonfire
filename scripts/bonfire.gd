@@ -5,11 +5,10 @@ extends Area2D
 
 var bonfire_lit := false
 
-var bonfire_scale := 2.43
+var bonfire_scale := 5
 var bonfire_energy := 1.00
 const SCALE_OFFSET := 0.5
 const ENERGY_OFFSET := 1.0
-
 
 func _process(delta: float) -> void:
 	if bonfire_lit:
@@ -18,7 +17,6 @@ func _process(delta: float) -> void:
 
 		var scale_off := randf_range(-SCALE_OFFSET, SCALE_OFFSET)
 		$FlameLight.texture_scale = lerp($FlameLight.texture_scale, bonfire_scale + scale_off, delta*5)
-
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is not Player or bonfire_lit:

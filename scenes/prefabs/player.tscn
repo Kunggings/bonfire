@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=6 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://biaqp0lcnatka" path="res://scripts/player_new.gd" id="1_tou0u"]
+[ext_resource type="Texture2D" uid="uid://bnw53el0pouln" path="res://Light.tres" id="3_n0leu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -27,6 +28,10 @@ occluder = SubResource("OccluderPolygon2D_oul6g")
 top_level = true
 
 [node name="HealthDrainTimer" type="Timer" parent="."]
+wait_time = 0.309
 autostart = true
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="LampLight" type="PointLight2D" parent="."]
+color = Color(1, 0.5294118, 0.18431373, 1)
+texture = ExtResource("3_n0leu")
+texture_scale = 2.42
