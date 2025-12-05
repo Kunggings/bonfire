@@ -17,7 +17,7 @@ extends CharacterBody2D
 
 const SCALE_OFFSET := 0.5
 const ENERGY_OFFSET := 1.0
-const MAX_SCALE := 2.43
+const MAX_SCALE := 5
 const MAX_ENERGY := 1.0
 
 func _ready() -> void:
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		$LampLight.visible = true
 
 	var target_energy: float = lerp(0.0, MAX_ENERGY, health_percent)
-	var target_scale: float = lerp(0.5, MAX_SCALE, health_percent)
+	var target_scale: float = lerp(1, MAX_SCALE, health_percent)
 
 	var energy_off: float = randf_range(-ENERGY_OFFSET, ENERGY_OFFSET)
 	$LampLight.energy = lerp($LampLight.energy, target_energy + energy_off, delta * 5)

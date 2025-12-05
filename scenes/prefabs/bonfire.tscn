@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8yvnqi01y1p0" path="res://scripts/bonfire.gd" id="1_7cyym"]
 [ext_resource type="Texture2D" uid="uid://7twogww0m64t" path="res://textures/bonfire_empty.png" id="2_wfoe5"]
-[ext_resource type="Texture2D" uid="uid://bnw53el0pouln" path="res://Light.tres" id="3_iyjrp"]
+[ext_resource type="Texture2D" uid="uid://bnw53el0pouln" path="res://textures/Light.tres" id="3_iyjrp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vw27"]
 

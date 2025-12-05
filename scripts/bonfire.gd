@@ -1,11 +1,11 @@
 extends Area2D
 
 @export var lit_texture := preload("res://textures/bonfire.png")
-@export var heal_amount: float = 10.0
+@export var heal_amount: float = 50.0
 
 var bonfire_lit := false
 
-var bonfire_scale := 5
+var bonfire_scale := 3
 var bonfire_energy := 1.00
 const SCALE_OFFSET := 0.5
 const ENERGY_OFFSET := 1.0
