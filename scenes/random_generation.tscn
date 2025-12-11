@@ -22,12 +22,9 @@ script = ExtResource("1_mmgq7")
 noise_height_texture = SubResource("NoiseTexture2D_wyi8h")
 tree_texture = SubResource("NoiseTexture2D_m2gbs")
 
-[node name="TileMap" type="TileMap" parent="World"]
-z_index = -1
-y_sort_enabled = true
+[node name="Layer Floor" type="TileMapLayer" parent="World"]
 tile_set = ExtResource("2_wyi8h")
-format = 2
-layer_0/y_sort_enabled = true
-layer_1/name = "Layer1"
-layer_1/y_sort_enabled = true
-layer_1/y_sort_origin = 1
+
+[node name="Layer Tree" type="TileMapLayer" parent="World"]
+z_index = 1
+tile_set = ExtResource("2_wyi8h")
