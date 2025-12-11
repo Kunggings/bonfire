@@ -42,7 +42,7 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="CollisionBoarder" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionBoarder"]
@@ -61,7 +61,6 @@ tile_map_data = PackedByteArray("AAAHAAQAAgAFAAAAAAAHAAUAAgAFAAEAAAAPAAQAAgAFAAA
 tile_set = ExtResource("6_ya4ey")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Bonfires" type="Node" parent="."]
