@@ -1,5 +1,7 @@
 extends Node
 
+@export var map_size := 100
+
 @export var noise_height_texture: NoiseTexture2D
 @export var tree_texture: NoiseTexture2D
 
@@ -11,7 +13,6 @@ var tree_threshold: float = 0.8       # Above this = tree
 
 var noise: Noise
 var tree_noise: Noise
-var length := 100
 
 var source_id := 0
 var tree_source_id := 3
@@ -57,8 +58,8 @@ func _ready() -> void:
 	generate_world()
 
 func generate_world():
-	for x in range(-length / 2, length / 2):
-		for y in range(-length / 2, length / 2):
+	for x in range(-map_size / 2, map_size / 2):
+		for y in range(-map_size / 2, map_size / 2):
 
 			var noise_val := noise.get_noise_2d(x, y)
 			var tree_noise_val := tree_noise.get_noise_2d(x, y)

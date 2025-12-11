@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7ppxkw4ycct"]
+
+[ext_resource type="Script" uid="uid://dmt3tgo48e6yc" path="res://fire_spawner.gd" id="1_n8kgh"]
+[ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/prefabs/bonfire.tscn" id="2_q6tw7"]
+
+[node name="Random Spawn Bonfire" type="Node2D"]
+
+[node name="Bonfire Spawner" type="Node" parent="."]
+script = ExtResource("1_n8kgh")
+bonfire_scene = ExtResource("2_q6tw7")
+bonfire_count = 300
+map_size = 3200

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=10 format=4 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/prefabs/player.tscn" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/prefabs/bonfire.tscn" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://85syvp8pflpd" path="res://scenes/random_generation.tscn" id="6_tefeu"]
 [ext_resource type="TileSet" uid="uid://dqk8rlrty2f5o" path="res://tileset/BasicTileSet.tres" id="6_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://e7ppxkw4ycct" path="res://scripts/random_spawn_bonfire.tscn" id="7_o6xl0"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -66,13 +67,18 @@ color = Color(0, 0, 0, 1)
 [node name="Bonfires" type="Node" parent="."]
 
 [node name="Bonfire2" parent="Bonfires" instance=ExtResource("5_choun")]
+visible = false
 position = Vector2(756, 143)
 
 [node name="Bonfire3" parent="Bonfires" instance=ExtResource("5_choun")]
+visible = false
 position = Vector2(-57, 143)
 
 [node name="Bonfire" parent="Bonfires" instance=ExtResource("5_choun")]
+visible = false
 position = Vector2(335, 216)
 
 [node name="RandomGeneration" parent="." instance=ExtResource("6_tefeu")]
 position = Vector2(756, 143)
+
+[node name="Random Spawn Bonfire" parent="." instance=ExtResource("7_o6xl0")]
