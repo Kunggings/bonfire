@@ -101,10 +101,11 @@ func try_grab():
 	if closest_body:
 		print("GRABBED:", closest_body.name)
 		held_item = closest_body
+		held_item.pickupSound() 
 
 func drop_item():
 	if not held_item:
 		return
-
+	held_item.putdownSound() 
 	held_item.global_position -= held_item_offset*1.25
 	held_item = null

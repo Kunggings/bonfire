@@ -1,9 +1,7 @@
 extends StaticBody2D
 
-var holder = null
-
-func set_held(player):
-	holder = player
+func pickupSound():
+	$PickupAudio.play()
 	
-func release():
-	holder = null
+func putdownSound():
+	$PutdownAudio.play()

@@ -25,7 +25,10 @@ func _on_body_entered(body: Node2D) -> void:
 	bonfire_lit = true
 
 	print("Bonfire")
-
+	
+	$BonfireLitSound.play()
+	$BonfireSound.play()
+	
 	body.current_health = min(body.current_health + heal_amount, body.max_health)
 
 	$Sprite.texture = lit_texture

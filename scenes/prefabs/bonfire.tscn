@@ -41,8 +41,14 @@ shape = SubResource("CircleShape2D_rrxl2")
 
 [node name="BonfireLitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_m8cxp")
+volume_db = 3.0
+bus = &"Bonfire"
 
 [node name="BonfireSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_hfgp3")
+volume_db = 10.0
+max_distance = 200.0
+attenuation = 1.6245081
+bus = &"Bonfire"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
