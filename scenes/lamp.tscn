@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8i7lnfekranh"]
+
+[ext_resource type="Script" uid="uid://bsoppgvdyqr02" path="res://scenes/static_bodys_2d.gd" id="1_f2tjl"]
+[ext_resource type="Texture2D" uid="uid://d26pvw32mi3jh" path="res://textures/lantern.png" id="2_wd4c3"]
+[ext_resource type="Texture2D" uid="uid://bnw53el0pouln" path="res://textures/Light.tres" id="3_f3gd7"]
+[ext_resource type="Script" uid="uid://b5yrb1u64le5q" path="res://scenes/flicker.gd" id="4_q4m2g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tipki"]
+radius = 160.15794
+
+[node name="Lamp" type="StaticBody2D"]
+z_index = 4
+scale = Vector2(0.28125, 0.28125)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_f2tjl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tipki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_wd4c3")
+
+[node name="LampLight" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+texture = ExtResource("3_f3gd7")
+texture_scale = 9.67
+script = ExtResource("4_q4m2g")

@@ -34,6 +34,7 @@ top_level = true
 autostart = true
 
 [node name="LampLight" type="PointLight2D" parent="."]
+enabled = false
 color = Color(1, 0.5294118, 0.18431373, 1)
 energy = 0.0
 texture = ExtResource("3_n0leu")
