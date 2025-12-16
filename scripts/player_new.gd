@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var zoom_out_amount: float = 1.5
 @export var zoom_speed: float = 1.0
 @export var move_threshold: float = 10.0
+@export var held_item_offset := Vector2(0, -20)
 
 const SCALE_OFFSET := 0.5
 const ENERGY_OFFSET := 1.0
@@ -75,8 +76,7 @@ func _physics_process(delta: float) -> void:
 
 
 	if held_item and Input.is_action_pressed("Hold"):
-		#held_item.global_position = global_position
-		pass
+		held_item.global_position = global_position + held_item_offset
 
 
 func _on_health_drain_timer_timeout() -> void:
@@ -91,12 +91,13 @@ func try_grab():
 	for body in $"Hold-Area2D".get_overlapping_bodies():
 		if body is StaticBody2D and body.collision_layer & (1 << 3):
 			print("GRABBED:", body.name)
-			held_item = body.get_parent()  
+			held_item = body
 			break
 
 
 func drop_item():
 	if not held_item:
 		return
-		
+
+	held_item.global_position -= held_item_offset*1.25
 	held_item = null
