@@ -20,8 +20,20 @@ const ENERGY_OFFSET := 1.0
 const MAX_SCALE := 5
 const MAX_ENERGY := 1.0
 
+var held_item: Node2D = null
+
+
 func _ready() -> void:
 	$HealthDrainTimer.timeout.connect(_on_health_drain_timer_timeout)
+
+
+func _input(event):
+	if event.is_action_pressed("Hold"):
+		print("try to hold")
+		try_grab()
+	elif event.is_action_released("Hold"):
+		drop_item()
+
 
 func _process(delta: float) -> void:
 	var health_percent: float = current_health / max_health
@@ -61,6 +73,30 @@ func _physics_process(delta: float) -> void:
 
 	camera.zoom = camera.zoom.lerp(target_zoom, delta * zoom_speed)
 
+
+	if held_item and Input.is_action_pressed("Hold"):
+		#held_item.global_position = global_position
+		pass
+
+
 func _on_health_drain_timer_timeout() -> void:
 	current_health -= health_drain_per_second
 	current_health = clamp(current_health, 0, max_health)
+
+
+func try_grab():
+	if held_item:
+		return
+
+	for body in $"Hold-Area2D".get_overlapping_bodies():
+		if body is StaticBody2D and body.collision_layer & (1 << 3):
+			print("GRABBED:", body.name)
+			held_item = body.get_parent()  
+			break
+
+
+func drop_item():
+	if not held_item:
+		return
+		
+	held_item = null
