@@ -64,7 +64,6 @@ tile_map_data = PackedByteArray("AAAHAAQAAgAFAAAAAAAHAAUAAgAFAAEAAAAPAAQAAgAFAAA
 tile_set = ExtResource("6_ya4ey")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Bonfires" type="Node" parent="."]
