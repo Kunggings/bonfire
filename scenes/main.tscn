@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=13 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/prefabs/player.tscn" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://e7ppxkw4ycct" path="res://scripts/random_spawn_bonfire.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/dark_fantasy.mp3" id="9_85g3d"]
-[ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="9_choun"]
-[ext_resource type="Script" uid="uid://b2ssak0rclyix" path="res://scenes/enemy.gd" id="9_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://bm4quyxlrypdw" path="res://scenes/wall.tscn" id="10_choun"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -19,17 +19,11 @@ gradient = SubResource("Gradient_7mycd")
 width = 419
 height = 16
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_choun"]
-cull_mode = 1
-polygon = PackedVector2Array(-25, -25, -25, 25, 25, 25, 25, -25)
-
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_tefeu")]
 z_index = 2
-position = Vector2(319, 108)
+position = Vector2(357, 37)
 scale = Vector2(0.5, 0.5)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -52,6 +46,7 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
@@ -72,18 +67,9 @@ volume_db = -10.0
 autoplay = true
 bus = &"Bonfire"
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-z_index = 1
+[node name="Enemy" parent="." instance=ExtResource("9_choun")]
 position = Vector2(240, 207)
-script = ExtResource("9_ya4ey")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-modulate = Color(0, 1, 1, 1)
-texture = ExtResource("9_choun")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(2.5, 2.5)
-shape = SubResource("RectangleShape2D_tipki")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="CharacterBody2D"]
-occluder = SubResource("OccluderPolygon2D_choun")
+[node name="Wall" parent="." instance=ExtResource("10_choun")]
+z_index = 4
+position = Vector2(298, 131)
