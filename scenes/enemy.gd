@@ -30,7 +30,6 @@ var is_paused := false
 var last_known_position: Vector2
 var search_timer := 0.0
 
-# -------------------------------------------------
 
 func _ready():
 	spawn_position = global_position
@@ -39,7 +38,6 @@ func _ready():
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 
-# -------------------------------------------------
 
 func _physics_process(delta):
 	if target:
@@ -57,9 +55,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-# -------------------------------------------------
-# IDLE
-# -------------------------------------------------
 
 func _idle_behavior(delta):
 	if is_paused:
@@ -81,9 +76,6 @@ func _idle_behavior(delta):
 
 	velocity = direction.normalized() * idle_speed
 
-# -------------------------------------------------
-# ACTIVE
-# -------------------------------------------------
 
 func _chase_player():
 	if not target:
@@ -97,10 +89,6 @@ func _chase_player():
 	else:
 		state = State.SEARCHING
 		search_timer = search_time
-
-# -------------------------------------------------
-# SEARCHING
-# -------------------------------------------------
 
 func _search_behavior(delta):
 	var direction = last_known_position - global_position
@@ -116,18 +104,10 @@ func _search_behavior(delta):
 			target = null
 			_pick_new_wander_target()
 
-# -------------------------------------------------
-# WANDER
-# -------------------------------------------------
-
 func _pick_new_wander_target():
 	var angle = randf() * TAU
 	var radius = randf() * wander_radius
 	wander_target = spawn_position + Vector2(cos(angle), sin(angle)) * radius
-
-# -------------------------------------------------
-# DETECTION
-# -------------------------------------------------
 
 func _on_body_entered(body):
 	if body == player:
@@ -143,11 +123,6 @@ func _on_body_exited(body):
 			last_known_position = body.global_position
 			state = State.SEARCHING
 			search_timer = search_time
-		# DO NOT clear target here
-
-# -------------------------------------------------
-# RAYCAST
-# -------------------------------------------------
 
 func _update_raycast():
 	raycast.target_position = raycast.to_local(target.global_position)

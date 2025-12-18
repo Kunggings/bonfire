@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=13 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/prefabs/player.tscn" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
-[ext_resource type="PackedScene" uid="uid://bm4quyxlrypdw" path="res://scenes/wall.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://cdcs8uhqfyxk2" path="res://scenes/nav_mesh_enemy.tscn" id="11_ya4ey"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
@@ -71,10 +70,6 @@ bus = &"Bonfire"
 [node name="Enemy" parent="." instance=ExtResource("9_choun")]
 visible = false
 position = Vector2(240, 207)
-
-[node name="Wall" parent="." instance=ExtResource("10_choun")]
-z_index = 4
-position = Vector2(298, 131)
 
 [node name="NavMeshEnemy" parent="." instance=ExtResource("11_ya4ey")]
 z_index = 4

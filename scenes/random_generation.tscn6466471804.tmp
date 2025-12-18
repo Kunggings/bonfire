@@ -19,8 +19,10 @@ noise = SubResource("FastNoiseLite_wyi8h")
 
 [node name="World" type="TileMapLayer" parent="."]
 script = ExtResource("1_mmgq7")
+map_size = null
 noise_height_texture = SubResource("NoiseTexture2D_wyi8h")
 tree_texture = SubResource("NoiseTexture2D_m2gbs")
+grass_threshold = null
 stone_threshold = -0.2
 
 [node name="Layer Floor" type="TileMapLayer" parent="World"]

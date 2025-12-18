@@ -1,15 +1,13 @@
-extends Node
+extends TileMapLayer
 
 @export var map_size := 100
 
 @export var noise_height_texture: NoiseTexture2D
 @export var tree_texture: NoiseTexture2D
 
-# ====== ADJUSTABLE THRESHOLDS ======
 @export var grass_threshold: float = 0.0      # Above this = grass
 @export var stone_threshold: float = -0.1     # Below this = stone
 var tree_threshold: float = 0.8       # Above this = tree
-# ===================================
 
 var noise: Noise
 var tree_noise: Noise
@@ -64,7 +62,6 @@ func generate_world():
 			var noise_val := noise.get_noise_2d(x, y)
 			var tree_noise_val := tree_noise.get_noise_2d(x, y)
 
-			# --------- TERRAIN BASED ON THRESHOLDS ---------
 			if noise_val > grass_threshold:
 				layer_floor.set_cell(Vector2i(x, y), source_id, grass_atlas_arr.pick_random())
 
@@ -76,3 +73,12 @@ func generate_world():
 
 			else:
 				layer_floor.set_cell(Vector2i(x, y), source_id, edge_stone_atlas_arr.pick_random())
+
+func _use_tile_data_runtime_update(coords) -> bool:
+	if coords in layer_tree.get_used_cells_by_id(tree_source_id):
+		return true
+	return false
+	
+func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData):
+	if coords in layer_tree.get_used_cells_by_id(tree_source_id):
+		tile_data.set_navigation_polygon(1, null)
