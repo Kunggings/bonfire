@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://85syvp8pflpd"]
+[gd_scene load_steps=8 format=3 uid="uid://85syvp8pflpd"]
 
 [ext_resource type="Script" uid="uid://b2h5seb8vqybj" path="res://scenes/world.gd" id="1_mmgq7"]
 [ext_resource type="TileSet" uid="uid://dqk8rlrty2f5o" path="res://tileset/BasicTileSet.tres" id="2_wyi8h"]
+[ext_resource type="Script" uid="uid://eujq125oja6k" path="res://scripts/NavRemove.gd" id="3_m2gbs"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mmgq7"]
 
@@ -18,6 +19,7 @@ noise = SubResource("FastNoiseLite_wyi8h")
 [node name="RandomGeneration" type="Node2D"]
 
 [node name="World" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_wyi8h")
 script = ExtResource("1_mmgq7")
 noise_height_texture = SubResource("NoiseTexture2D_wyi8h")
 tree_texture = SubResource("NoiseTexture2D_m2gbs")
@@ -25,6 +27,7 @@ stone_threshold = -0.2
 
 [node name="Layer Floor" type="TileMapLayer" parent="World"]
 tile_set = ExtResource("2_wyi8h")
+script = ExtResource("3_m2gbs")
 
 [node name="Layer Tree" type="TileMapLayer" parent="World"]
 z_index = 1

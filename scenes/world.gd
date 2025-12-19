@@ -46,6 +46,9 @@ var tree_atlas_arr := [
 @onready var layer_floor: TileMapLayer = $"Layer Floor"
 @onready var layer_tree: TileMapLayer = $"Layer Tree"
 
+var object_cells: Array[Vector2i] = []
+
+
 func _ready() -> void:
 	noise_height_texture.noise.seed = randi()
 	tree_texture.noise.seed = randi()
@@ -54,6 +57,15 @@ func _ready() -> void:
 	tree_noise = tree_texture.noise
 
 	generate_world()
+	
+	#---------------------------------------------------
+	
+	object_cells.clear()
+	for cell in layer_tree.get_used_cells():
+		object_cells.append(cell)
+	print("Object layer used cells:", object_cells)
+	
+	#------------------------------------------------------
 
 func generate_world():
 	for x in range(-map_size / 2, map_size / 2):
@@ -73,12 +85,17 @@ func generate_world():
 
 			else:
 				layer_floor.set_cell(Vector2i(x, y), source_id, edge_stone_atlas_arr.pick_random())
-
-func _use_tile_data_runtime_update(coords) -> bool:
-	if coords in layer_tree.get_used_cells_by_id(tree_source_id):
-		return true
-	return false
 	
-func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData):
-	if coords in layer_tree.get_used_cells_by_id(tree_source_id):
-		tile_data.set_navigation_polygon(1, null)
+
+
+
+func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+	print("hello")
+	return coords in object_cells
+ 
+#func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
+	#if coords in object_cells:
+	 #
+		#tile_data.set_navigation_polygon(0, null)
+		#print("Removed navigation polygon at:", coords)
+		#
