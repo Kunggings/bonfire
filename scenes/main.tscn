@@ -1,17 +1,22 @@
-[gd_scene load_steps=19 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=24 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://scripts/progress_bar.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/bonfire.tscn" id="5_choun"]
+[ext_resource type="AudioStream" uid="uid://bwq1188xigb4s" path="res://audio/lamp/pickup.wav" id="8_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/background/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
+[ext_resource type="AudioStream" uid="uid://bcj3s0855si3o" path="res://audio/lamp/putdown.wav" id="9_muem4"]
 [ext_resource type="TileSet" uid="uid://bdp1a2tm8i0br" path="res://tileset/TileSetMain.tres" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://xcvxs7wi5fpm" path="res://scripts/floor.gd" id="11_eb6dy"]
 [ext_resource type="Script" uid="uid://dmt3tgo48e6yc" path="res://scripts/bonfire_spawner.gd" id="11_ya4ey"]
 [ext_resource type="Material" uid="uid://cjqtcdb6mkjsq" path="res://materials/crt.tres" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dp1n2qysrcbih" path="res://scenes/squishy_godot.tscn" id="13_trceg"]
+[ext_resource type="Script" uid="uid://bsoppgvdyqr02" path="res://scripts/item.gd" id="14_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://te7ult85113m" path="res://audio/Squishy Godot/squeaky_toy.wav" id="17_muem4"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -34,9 +39,10 @@ noise = SubResource("FastNoiseLite_trceg")
 
 [node name="Main" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CRT Shader" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CRT Shader"]
 material = ExtResource("12_eb6dy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
+visible = false
 z_index = 830
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -64,11 +71,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Player" parent="." instance=ExtResource("1_tefeu")]
-z_index = 2
-position = Vector2(357, 37)
-scale = Vector2(0.5, 0.5)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -91,20 +93,27 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_tefeu")]
+z_index = 2
+position = Vector2(357, 37)
+scale = Vector2(0.5, 0.5)
 
 [node name="Bonfire" parent="." instance=ExtResource("5_choun")]
 position = Vector2(335, 216)
 
 [node name="Lamp" parent="." instance=ExtResource("8_tipki")]
 position = Vector2(160, 127)
+pickup_sound = ExtResource("8_jbj1t")
+putdown_sound = ExtResource("9_muem4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
 volume_db = -23.0
 autoplay = true
-bus = &"Bonfire"
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("9_choun")]
 position = Vector2(240, 207)
@@ -124,3 +133,9 @@ script = ExtResource("11_ya4ey")
 bonfire_scene = ExtResource("5_choun")
 bonfire_count = 300
 map_size = 3200
+
+[node name="Squishy Godot" parent="." instance=ExtResource("13_trceg")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("14_a8y0u")
+pickup_sound = ExtResource("17_muem4")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://te7ult85113m"
+path="res://.godot/imported/squeaky_toy.wav-5a86384b83fa7719587d6b15a728ce2a.sample"
+
+[deps]
+
+source_file="res://audio/Squishy Godot/squeaky_toy.wav"
+dest_files=["res://.godot/imported/squeaky_toy.wav-5a86384b83fa7719587d6b15a728ce2a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

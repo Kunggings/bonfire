@@ -94,7 +94,7 @@ func try_grab():
 	var closest_distance := INF
 
 	for body in $"Hold-Area2D".get_overlapping_bodies():
-		if body is StaticBody2D and body.collision_layer & (1 << 3):
+		if body is StaticBody2D and body.get_collision_layer_value(4):  
 			var distance := global_position.distance_to(body.global_position)
 			if distance < closest_distance:
 				closest_distance = distance

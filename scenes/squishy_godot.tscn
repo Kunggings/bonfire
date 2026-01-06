@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp1n2qysrcbih"]
+
+[ext_resource type="Texture2D" uid="uid://ynh76dmjddyx" path="res://textures/godot_plush.png" id="1_dsfrn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsfrn"]
+size = Vector2(30, 30)
+
+[sub_resource type="Gradient" id="Gradient_dsfrn"]
+offsets = PackedFloat32Array(0, 0.63247865)
+colors = PackedColorArray(0, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_67x4b"]
+gradient = SubResource("Gradient_dsfrn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Squishy Godot" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dsfrn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_dsfrn")
+
+[node name="PickupAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PutdownAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_67x4b")
