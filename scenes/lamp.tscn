@@ -27,7 +27,7 @@ texture = ExtResource("2_wd4c3")
 [node name="LampLight" type="PointLight2D" parent="."]
 color = Color(1, 0, 0, 1)
 texture = ExtResource("3_f3gd7")
-texture_scale = 9.67
+texture_scale = 50.0
 script = ExtResource("4_q4m2g")
 
 [node name="PickupAudio" type="AudioStreamPlayer" parent="."]

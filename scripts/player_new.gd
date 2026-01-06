@@ -37,6 +37,8 @@ func _input(event):
 
 
 func _process(delta: float) -> void:
+	# RenderingServer.global_shader_parameter_set("camera_position", $Camera2D.global_position)
+
 	var health_percent: float = current_health / max_health
 
 	if health_percent <= 0.0:
@@ -101,11 +103,11 @@ func try_grab():
 	if closest_body:
 		print("GRABBED:", closest_body.name)
 		held_item = closest_body
-		held_item.pickupSound() 
+		held_item.pickupSound()
 
 func drop_item():
 	if not held_item:
 		return
-	held_item.putdownSound() 
+	held_item.putdownSound()
 	held_item.global_position -= held_item_offset*1.25
 	held_item = null

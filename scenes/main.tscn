@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=16 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/prefabs/player.tscn" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
@@ -9,7 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
-[ext_resource type="PackedScene" uid="uid://cdcs8uhqfyxk2" path="res://scenes/nav_mesh_enemy.tscn" id="11_ya4ey"]
+[ext_resource type="Shader" uid="uid://cd4l26s15ji0g" path="res://fog.gdshader" id="10_choun"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_choun"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ya4ey"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_choun")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = ExtResource("10_choun")
+shader_parameter/fog_texture = SubResource("NoiseTexture2D_ya4ey")
+shader_parameter/fog_speed = 3.0
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -20,6 +32,27 @@ width = 419
 height = 16
 
 [node name="Main" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = 830
+scroll_scale = Vector2(1.1, 1.1)
+repeat_size = Vector2(1152, 648)
+repeat_times = 8
+
+[node name="FogColorRect" type="ColorRect" parent="Parallax2D"]
+z_index = 490
+material = SubResource("ShaderMaterial_ya4ey")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Player" parent="." instance=ExtResource("1_tefeu")]
 z_index = 2
@@ -46,7 +79,6 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
@@ -63,7 +95,7 @@ position = Vector2(160, 127)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
-volume_db = -10.0
+volume_db = -23.0
 autoplay = true
 bus = &"Bonfire"
 
@@ -71,7 +103,15 @@ bus = &"Bonfire"
 visible = false
 position = Vector2(240, 207)
 
-[node name="NavMeshEnemy" parent="." instance=ExtResource("11_ya4ey")]
-z_index = 4
-position = Vector2(179, 238)
-target_path = NodePath("../Player")
+[node name="FogCanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FogColorRect" type="ColorRect" parent="FogCanvasLayer"]
+visible = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ya4ey")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
