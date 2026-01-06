@@ -1,28 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=19 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
+[ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://scripts/progress_bar.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/bonfire.tscn" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/background/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
-[ext_resource type="Shader" uid="uid://cd4l26s15ji0g" path="res://shaders/fog.gdshader" id="10_choun"]
 [ext_resource type="TileSet" uid="uid://bdp1a2tm8i0br" path="res://tileset/TileSetMain.tres" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://xcvxs7wi5fpm" path="res://scripts/floor.gd" id="11_eb6dy"]
 [ext_resource type="Script" uid="uid://dmt3tgo48e6yc" path="res://scripts/bonfire_spawner.gd" id="11_ya4ey"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_choun"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ya4ey"]
-generate_mipmaps = false
-noise = SubResource("FastNoiseLite_choun")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
-shader = ExtResource("10_choun")
-shader_parameter/fog_texture = SubResource("NoiseTexture2D_ya4ey")
-shader_parameter/fog_speed = 3.0
+[ext_resource type="Material" uid="uid://cjqtcdb6mkjsq" path="res://materials/crt.tres" id="12_eb6dy"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -45,8 +34,17 @@ noise = SubResource("FastNoiseLite_trceg")
 
 [node name="Main" type="Node2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("12_eb6dy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Fog" type="Parallax2D" parent="."]
-visible = false
 z_index = 830
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -54,7 +52,7 @@ repeat_times = 8
 
 [node name="FogColorRect" type="ColorRect" parent="Fog"]
 z_index = 490
-material = SubResource("ShaderMaterial_ya4ey")
+material = ExtResource("1_ya4ey")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,6 +76,7 @@ scale = Vector2(0.5, 0.5)
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("3_tipki")
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar" type="TextureProgressBar" parent="UI"]
 anchors_preset = 5
@@ -92,7 +91,6 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 

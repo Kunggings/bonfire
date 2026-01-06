@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dx0d70cs81u2"]
+
+[ext_resource type="Shader" uid="uid://cd4l26s15ji0g" path="res://shaders/fog.gdshader" id="1_m2o7x"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_choun"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ya4ey"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_choun")
+seamless = true
+
+[resource]
+shader = ExtResource("1_m2o7x")
+shader_parameter/fog_texture = SubResource("NoiseTexture2D_ya4ey")
+shader_parameter/fog_speed = 3.0
