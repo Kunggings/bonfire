@@ -14,6 +14,10 @@ config/name="bonfire"
 run/main_scene="uid://b66yo8cfbh81s"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://audio/bus/default_bus_layout.tres"
+
 [input]
 
 up={

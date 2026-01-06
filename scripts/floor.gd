@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://85syvp8pflpd"]
+extends TileMapLayer
 
-[ext_resource type="TileSet" uid="uid://bdp1a2tm8i0br" path="res://tileset/TileSetMain.tres" id="2_m2gbs"]
-
-[sub_resource type="GDScript" id="GDScript_mmgq7"]
-script/source = "extends TileMapLayer
-
-@onready var object: TileMapLayer = $Object
-@onready var floor: TileMapLayer = $Floor
+@onready var object: TileMapLayer = $"../Object"
 
 @export var map_size := 100
 @export var floor_noise_texture: NoiseTexture2D
@@ -41,14 +35,14 @@ func _ready():
 	object_cells.clear()
 	for cell in object.get_used_cells():
 		object_cells.append(cell)
-	#print(\"Object layer used cells:\", object_cells)
+	#print("Object layer used cells:", object_cells)
  
 func generate_world():
 	
 	for x in range(-map_size / 2, map_size / 2):
 		for y in range(-map_size / 2, map_size / 2):
 
-			#print(\"placing tile at \", x, \", \", y)
+			#print("placing tile at ", x, ", ", y)
 			var floor_noise_val := floor_noise.get_noise_2d(x, y)
 			var object_noise_val := object_noise.get_noise_2d(x,y)
 			
@@ -80,18 +74,6 @@ func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
 	if coords in object_cells:
 	 
 		tile_data.set_navigation_polygon(0, null)
-		#print(\"Removed navigation polygon at:\", coords)
+		#print("Removed navigation polygon at:", coords)
 
 		
-"
-
-[node name="WorldGeneration" type="TileMapLayer"]
-script = SubResource("GDScript_mmgq7")
-
-[node name="Floor" type="TileMapLayer" parent="."]
-z_index = 275
-tile_set = ExtResource("2_m2gbs")
-
-[node name="Object" type="TileMapLayer" parent="."]
-z_index = 505
-tile_set = ExtResource("2_m2gbs")

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bcj3s0855si3o"
-path="res://.godot/imported/putdown.wav-aa9586897055d18eeb25fcfb5031940e.sample"
+path="res://.godot/imported/putdown.wav-c3c32f7941611c3eb4e5d8f31808b6ae.sample"
 
 [deps]
 
-source_file="res://audio/Lantern/putdown.wav"
-dest_files=["res://.godot/imported/putdown.wav-aa9586897055d18eeb25fcfb5031940e.sample"]
+source_file="res://audio/lamp/putdown.wav"
+dest_files=["res://.godot/imported/putdown.wav-c3c32f7941611c3eb4e5d8f31808b6ae.sample"]
 
 [params]
 

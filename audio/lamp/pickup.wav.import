@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bwq1188xigb4s"
-path="res://.godot/imported/pickup.wav-4b825337c5b444fa8f574f03702c2a70.sample"
+path="res://.godot/imported/pickup.wav-8b1c7980b14c30eabc9721eb39958600.sample"
 
 [deps]
 
-source_file="res://audio/Lantern/pickup.wav"
-dest_files=["res://.godot/imported/pickup.wav-4b825337c5b444fa8f574f03702c2a70.sample"]
+source_file="res://audio/lamp/pickup.wav"
+dest_files=["res://.godot/imported/pickup.wav-8b1c7980b14c30eabc9721eb39958600.sample"]
 
 [params]
 

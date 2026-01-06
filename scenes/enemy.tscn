@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://sqqo0hlhdj31"]
 
-[ext_resource type="Script" uid="uid://b2ssak0rclyix" path="res://scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://b2ssak0rclyix" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="2_4ra3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(10, 10)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_choun"]
 cull_mode = 1
@@ -18,14 +19,13 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_md0e3")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(100, 0)
-collision_mask = 3
-collide_with_areas = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
 texture = ExtResource("2_4ra3w")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2.5, 2.5)
@@ -39,3 +39,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_md0e3")
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
+collide_with_areas = true
