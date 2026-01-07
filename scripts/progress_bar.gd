@@ -9,6 +9,6 @@ func _ready() -> void:
 	max_value = 100
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player_ref:
 		value = float(player_ref.current_health) / float(player_ref.max_health) * 100.0

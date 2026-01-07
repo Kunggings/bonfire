@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://cc626wkj1ap57"]
+
+[ext_resource type="Script" uid="uid://c4agf765b1heh" path="res://scenes/enemy_state_machine.gd" id="1_8lm2t"]
+[ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_j526r"]
+[ext_resource type="Script" uid="uid://dehmrkrblfj5s" path="res://scripts/state_machine.gd" id="3_vs03u"]
+[ext_resource type="Script" uid="uid://cofxkcwh6gfb" path="res://scripts/idle.gd" id="4_yx1bk"]
+[ext_resource type="Script" uid="uid://05410lf7r3jl" path="res://scripts/wander.gd" id="5_f6g7r"]
+[ext_resource type="Script" uid="uid://ce1wv228ru8oj" path="res://scripts/follow.gd" id="6_neb6v"]
+[ext_resource type="Script" uid="uid://c1xuypamo0ywd" path="res://scripts/search.gd" id="7_7s2vv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lm2t"]
+size = Vector2(10, 10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h04x7"]
+cull_mode = 1
+polygon = PackedVector2Array(-25, -25, -25, 25, 25, 25, 25, -25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vg71"]
+radius = 200.0
+
+[node name="EnemyStateMachine" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_8lm2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.6715297, 5.2173735e-05, 0.535144, 1)
+texture = ExtResource("1_j526r")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_8lm2t")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_h04x7")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_2vg71")
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
+collide_with_areas = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_vs03u")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state", "follow_state")]
+script = ExtResource("4_yx1bk")
+wander_state = NodePath("../Wander")
+follow_state = NodePath("../Follow")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "follow_state")]
+script = ExtResource("5_f6g7r")
+idle_state = NodePath("../Idle")
+follow_state = NodePath("../Follow")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("lose_state")]
+script = ExtResource("6_neb6v")
+lose_state = NodePath("../Search")
+
+[node name="Search" type="Node" parent="StateMachine"]
+script = ExtResource("7_7s2vv")

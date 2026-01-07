@@ -39,8 +39,8 @@ func _ready():
  
 func generate_world():
 	
-	for x in range(-map_size / 2, map_size / 2):
-		for y in range(-map_size / 2, map_size / 2):
+	for x in range(-map_size / 2.0, map_size / 2.0):
+		for y in range(-map_size / 2.0, map_size / 2.0):
 
 			#print("placing tile at ", x, ", ", y)
 			var floor_noise_val := floor_noise.get_noise_2d(x, y)

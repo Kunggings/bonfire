@@ -15,9 +15,10 @@ func spawn_bonfires():
 	for i in range(bonfire_count):
 		var bonfire = bonfire_scene.instantiate()
 		
+		var half = int(map_size * 0.5)
 		bonfire.position = Vector2(
-			randi_range(-map_size/2, map_size/2),
-			randi_range(-map_size/2, map_size/2)
+		randi_range(-half, half),
+		randi_range(-half, half)
 		)
 
 		add_child(bonfire)

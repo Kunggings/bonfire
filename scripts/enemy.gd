@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-enum State {
+enum EnemyState {
 	IDLE,
 	ACTIVE,
 	SEARCH
 }
 
-@export var state: State = State.IDLE
+@export var enemy_state: EnemyState = EnemyState.IDLE
 
 @export var target: CharacterBody2D
 @export var speed: float = 20.0
@@ -27,18 +27,19 @@ var last_known_position: Vector2 = Vector2.ZERO
 var idle_timer := 0.0
 var is_idling := true
 
+
 func _ready() -> void:
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 
 
 func _physics_process(delta: float) -> void:
-	match state:
-		State.IDLE:
+	match enemy_state:
+		EnemyState.IDLE:
 			_update_idle(delta)
-		State.ACTIVE:
+		EnemyState.ACTIVE:
 			_update_active(delta)
-		State.SEARCH:
+		EnemyState.SEARCH:
 			_update_search(delta)
 
 
@@ -53,7 +54,7 @@ func _update_active(delta: float) -> void:
 
 	if not target_in_range or not has_line_of_sight:
 		last_known_position = target.global_position
-		state = State.SEARCH
+		enemy_state = EnemyState.SEARCH
 		return
 
 	agent.target_position = target.global_position
@@ -71,12 +72,11 @@ func _update_active(delta: float) -> void:
 
 
 # ======================
-# SEARCH / MOVE TO LAST KNOWN POSITION
+# SEARCH
 # ======================
 func _update_search(delta: float) -> void:
-	# If agent finished moving, go idle
 	if agent.is_navigation_finished():
-		state = State.IDLE
+		enemy_state = EnemyState.IDLE
 		is_idling = true
 		idle_timer = idle_pause_time
 		return
@@ -144,7 +144,7 @@ func _update_line_of_sight() -> void:
 # ======================
 func _on_body_entered(body: Node) -> void:
 	if body == target:
-		state = State.ACTIVE
+		enemy_state = EnemyState.ACTIVE
 		target_in_range = true
 		is_idling = false
 
@@ -154,4 +154,4 @@ func _on_body_exited(body: Node) -> void:
 		target_in_range = false
 		has_line_of_sight = false
 		last_known_position = target.global_position
-		state = State.SEARCH
+		enemy_state = EnemyState.SEARCH
