@@ -1,13 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=24 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://scripts/progress_bar.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/bonfire.tscn" id="5_choun"]
+[ext_resource type="AudioStream" uid="uid://bwq1188xigb4s" path="res://audio/lamp/pickup.wav" id="8_muem4"]
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/background/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
+[ext_resource type="AudioStream" uid="uid://bcj3s0855si3o" path="res://audio/lamp/putdown.wav" id="9_dp3eg"]
 [ext_resource type="TileSet" uid="uid://bdp1a2tm8i0br" path="res://tileset/TileSetMain.tres" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://xcvxs7wi5fpm" path="res://scripts/floor.gd" id="11_eb6dy"]
 [ext_resource type="Script" uid="uid://dmt3tgo48e6yc" path="res://scripts/bonfire_spawner.gd" id="11_ya4ey"]
@@ -38,7 +40,6 @@ noise = SubResource("FastNoiseLite_trceg")
 [node name="Main" type="Node2D"]
 
 [node name="CRT Shader" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CRT Shader"]
 material = ExtResource("12_eb6dy")
@@ -49,7 +50,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
-visible = false
 z_index = 830
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -79,6 +79,7 @@ script = ExtResource("3_tipki")
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar" type="TextureProgressBar" parent="UI"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -91,7 +92,6 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
@@ -106,6 +106,8 @@ position = Vector2(335, 216)
 [node name="Lamp" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tipki")]
 position = Vector2(160, 127)
 player = NodePath("../Player")
+pickup_sound = ExtResource("8_muem4")
+putdown_sound = ExtResource("9_dp3eg")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
