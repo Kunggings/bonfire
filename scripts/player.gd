@@ -35,28 +35,6 @@ func _input(event):
 	elif event.is_action_released("Hold"):
 		drop_item()
 
-
-func _process(delta: float) -> void:
-	# RenderingServer.global_shader_parameter_set("camera_position", $Camera2D.global_position)
-
-	var health_percent: float = current_health / max_health
-
-	if health_percent <= 0.0:
-		$LampLight.visible = false
-		return
-	else:
-		$LampLight.visible = true
-
-	var target_energy: float = lerp(0.0, MAX_ENERGY, health_percent)
-	var target_scale: float = lerp(1, MAX_SCALE, health_percent)
-
-	var energy_off: float = randf_range(-ENERGY_OFFSET, ENERGY_OFFSET)
-	$LampLight.energy = lerp($LampLight.energy, target_energy + energy_off, delta * 5)
-
-	var scale_off: float = randf_range(-SCALE_OFFSET, SCALE_OFFSET)
-	$LampLight.texture_scale = lerp($LampLight.texture_scale, target_scale + scale_off, delta * 5)
-
-
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
@@ -79,12 +57,14 @@ func _physics_process(delta: float) -> void:
 
 	if held_item and Input.is_action_pressed("Hold"):
 		held_item.global_position = global_position + held_item_offset
-
+		
+	if current_health <= 0.0:
+		die()
+		
 
 func _on_health_drain_timer_timeout() -> void:
 	current_health -= health_drain_per_second
 	current_health = clamp(current_health, 0, max_health)
-
 
 func try_grab():
 	if held_item:
@@ -111,3 +91,10 @@ func drop_item():
 	held_item.putdownSound()
 	held_item.global_position -= held_item_offset*1.25
 	held_item = null
+	
+func heal(amount: float) -> void:
+	if held_item is Lamp:
+		current_health = clamp(current_health + amount, 0.0, max_health)
+
+func die() -> void:
+	get_tree().reload_current_scene()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=23 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://drlbjooqgew0a" path="res://scripts/fps_counter.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://r18eioa1lobb" path="res://scripts/progress_bar.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://23w0l2ox22f4" path="res://scenes/bonfire.tscn" id="5_choun"]
+[ext_resource type="Script" uid="uid://cmlke5ihiwl2" path="res://scenes/lamp.gd" id="8_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://b8i7lnfekranh" path="res://scenes/lamp.tscn" id="8_tipki"]
 [ext_resource type="AudioStream" uid="uid://bkaucgtaxs2bv" path="res://audio/background/dark_fantasy.mp3" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://sqqo0hlhdj31" path="res://scenes/enemy.tscn" id="9_choun"]
@@ -105,6 +106,7 @@ position = Vector2(335, 216)
 
 [node name="Lamp" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tipki")]
 position = Vector2(160, 127)
+script = ExtResource("8_jbj1t")
 player = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
