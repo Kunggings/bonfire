@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=11 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scenes/playerTest.gd" id="1_dqkch"]
+[ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scripts/player.gd" id="1_tuyoq"]
 [ext_resource type="Script" uid="uid://dehmrkrblfj5s" path="res://scripts/state_machine.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://bhk17nwthb3y0" path="res://scripts/player_camera.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://b2vluqleyfo71" path="res://scripts/idle_player.gd" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://crp0718oyfxxl" path="res://scripts/move_player.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://4ldqu26tw3gs" path="res://scenes/sprint_player.gd" id="7_fjrip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -20,7 +21,7 @@ radius = 124.004036
 collision_mask = 6
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_dqkch")
+script = ExtResource("1_tuyoq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7dm0k")
@@ -58,3 +59,6 @@ move = NodePath("../MovePlayer")
 [node name="MovePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("5_qlg0r")
 idle = NodePath("../IdlePlayer")
+
+[node name="SprintPlayer" type="Node" parent="StateMachine"]
+script = ExtResource("7_fjrip")

@@ -11,9 +11,6 @@ func Exit() -> void:
 	pass
 
 func Physics_Update(_delta: float) -> void:
-	
-	if owner.velocity == owner.sprint_speed: 
-			Transitioned.emit(self, idle.name)
 
 	if owner.velocity == Vector2.ZERO: 
 			Transitioned.emit(self, idle.name)
