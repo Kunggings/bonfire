@@ -17,8 +17,7 @@ func Exit() -> void:
 
 func Physics_Update(_delta: float) -> void:	
 
-	var to_target : Vector2 = owner.target.global_position - owner.global_position
-	owner.velocity = to_target.normalized() * move_speed
+	owner.target = owner.target_body.global_position
 	
 	if not owner.target_is_visible:
 		Transitioned.emit(self, lose_state.name)

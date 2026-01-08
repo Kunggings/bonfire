@@ -144,6 +144,6 @@ collision_mask = 0
 script = ExtResource("16_jbj1t")
 pickup_sound = ExtResource("17_muem4")
 
-[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("target") instance=ExtResource("18_dp3eg")]
+[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("target_body") instance=ExtResource("18_dp3eg")]
 position = Vector2(137, 229)
-target = NodePath("../Player")
+target_body = NodePath("../Player")

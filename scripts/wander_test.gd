@@ -11,24 +11,21 @@ var wander_location : Vector2
 
 func Enter() -> void:
 	
-	wander_location = generate_wander_location()
+	owner.target = generate_wander_target()
 
 func Exit() -> void:
 	pass
 
 func Physics_Update(_delta: float) -> void:
 	
-	var to_target : Vector2 = wander_location - owner.global_position
-	owner.velocity = to_target.normalized() * move_speed
-	
-	if wander_location.distance_to(owner.global_position) <= 1 :
+	if owner.target.distance_to(owner.global_position) <= 1 :
 		Transitioned.emit(self, idle_state.name)
 	
 	if owner.target_is_visible == true:
 		Transitioned.emit(self, follow_state.name)
 
 	
-func generate_wander_location() -> Vector2:
+func generate_wander_target() -> Vector2:
 	var shape = detection_area.get_node("CollisionShape2D").shape
 	var radius = shape.radius
 
