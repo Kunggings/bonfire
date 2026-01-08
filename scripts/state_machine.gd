@@ -1,8 +1,6 @@
 extends Node
 
 @export var initial_state: State
-var character: CharacterBody2D
-var target: CharacterBody2D
 
 var current_state: State
 var states: Dictionary = {}
@@ -10,17 +8,11 @@ var states: Dictionary = {}
 
 func _ready():
 	
-	character = owner as CharacterBody2D
-	target = owner.target
-	
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
 			child.Transitioned.connect(on_child_transition)
 			
-			child.character = character
-			child.target = target
-
 	if initial_state:
 		current_state = initial_state
 		current_state.Enter()
