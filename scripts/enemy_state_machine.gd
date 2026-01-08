@@ -14,7 +14,6 @@ func _ready():
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 	
-
 func _physics_process(_delta: float) -> void:
 	
 	if target_in_area:
@@ -32,8 +31,7 @@ func _physics_process(_delta: float) -> void:
 	nav_agent.target_position = target
 	var next_point := nav_agent.get_next_path_position()
 	var direction := (next_point - global_position).normalized()
-	#velocity = direction * state_machine.current_state.speed
-	velocity = direction * 20.0
+	velocity = direction * state_machine.current_state.move_speed
 	move_and_slide()
 	
 func _on_body_entered(body: Node) -> void:

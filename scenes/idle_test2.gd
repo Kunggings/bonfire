@@ -6,6 +6,7 @@ var idle_timer: SceneTreeTimer
 @export var follow_state: State
 @export var wander_state: State
 
+@export var move_speed: float = 0.0
 @export var timer_min: float = 0.5
 @export var timer_max: float = 5.0
 
