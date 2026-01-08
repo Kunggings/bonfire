@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=13 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scripts/player.gd" id="1_tuyoq"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://bhk17nwthb3y0" path="res://scripts/player_camera.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://b2vluqleyfo71" path="res://scripts/idle_player.gd" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://crp0718oyfxxl" path="res://scripts/move_player.gd" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://4ldqu26tw3gs" path="res://scenes/sprint_player.gd" id="7_fjrip"]
-[ext_resource type="Script" uid="uid://cyyrqbdvs81cv" path="res://scenes/label.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://4ldqu26tw3gs" path="res://scripts/sprint_player.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://cyyrqbdvs81cv" path="res://scripts/label.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://dncri7hr2khjv" path="res://scripts/dash_player.gd" id="8_ur7pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -33,10 +34,9 @@ texture = ExtResource("1_4flbx")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
 
-[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+[node name="PlayerCamera" type="Camera2D" parent="."]
 top_level = true
 script = ExtResource("3_tuyoq")
-target = NodePath("..")
 zoom_speed = 1.5
 
 [node name="HealthDrainTimer" type="Timer" parent="."]
@@ -62,9 +62,16 @@ script = ExtResource("5_qlg0r")
 idle = NodePath("../IdlePlayer")
 sprint = NodePath("../SprintPlayer")
 
-[node name="SprintPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="SprintPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "dash")]
 script = ExtResource("7_fjrip")
 idle = NodePath("../IdlePlayer")
+dash = NodePath("../DashPlayer")
+
+[node name="DashPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("return_state")]
+script = ExtResource("8_ur7pv")
+return_state = NodePath("../IdlePlayer")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/DashPlayer"]
 
 [node name="State Label" type="Label" parent="."]
 anchors_preset = 5
