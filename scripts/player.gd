@@ -2,12 +2,11 @@ class_name Player
 extends CharacterBody2D
 
 @export var move_speed: float = 50.0
-@export var sprint_speed: float = 100.0
-@export var current_speed: float = 100.0
 
 @export var max_health: float = 100.0
 @export var current_health: float = 100.0
-@export var health_drain_per_second: float = 1.0
+var health_drain: float = 1.0
+var direction: Vector2 = Vector2.ZERO
 
 @export var held_item_offset := Vector2(0, -20)
 
@@ -24,18 +23,14 @@ func _input(event):
 		
 
 func _physics_process(_delta: float) -> void:
-	var direction := Vector2(
+	
+	direction = Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	).normalized()
 	
-	if Input.is_action_pressed("Sprint"):
-		current_speed = sprint_speed
-	else:
-		current_speed = move_speed
 
-	print(current_speed)
-	velocity = direction * current_speed
+	velocity = direction * move_speed
 	move_and_slide()
 
 	if held_item and Input.is_action_pressed("Hold"):
@@ -46,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_health_drain_timer_timeout() -> void:
 	current_health = clamp(
-		current_health - health_drain_per_second,
+		current_health - health_drain,
 		0,
 		max_health
 	)

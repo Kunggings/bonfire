@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=12 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scripts/player.gd" id="1_tuyoq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b2vluqleyfo71" path="res://scripts/idle_player.gd" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://crp0718oyfxxl" path="res://scripts/move_player.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://4ldqu26tw3gs" path="res://scenes/sprint_player.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://cyyrqbdvs81cv" path="res://scenes/label.gd" id="8_smehm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -64,3 +65,14 @@ sprint = NodePath("../SprintPlayer")
 [node name="SprintPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("7_fjrip")
 idle = NodePath("../IdlePlayer")
+
+[node name="State Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -57.0
+offset_right = 20.0
+offset_bottom = -34.0
+grow_horizontal = 2
+script = ExtResource("8_smehm")
