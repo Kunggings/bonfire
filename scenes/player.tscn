@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=10 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scenes/playerTest.gd" id="1_dqkch"]
 [ext_resource type="Script" uid="uid://dehmrkrblfj5s" path="res://scripts/state_machine.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://bhk17nwthb3y0" path="res://scripts/player_camera.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://b2vluqleyfo71" path="res://scripts/idle_player.gd" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://crp0718oyfxxl" path="res://scripts/move_player.gd" id="5_qlg0r"]
 
@@ -30,8 +31,11 @@ texture = ExtResource("1_4flbx")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 top_level = true
+script = ExtResource("3_tuyoq")
+target = NodePath("..")
+zoom_speed = 1.5
 
 [node name="HealthDrainTimer" type="Timer" parent="."]
 autostart = true
