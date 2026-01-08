@@ -34,8 +34,6 @@ func on_child_transition(state, new_state_name):
 	if not new_state:
 		return
 
-	#print("current State", current_state)
 	current_state.Exit()
 	current_state = new_state
 	current_state.Enter()
-	#print("new State", current_state)

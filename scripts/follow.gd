@@ -1,10 +1,7 @@
 extends State
-class_name FollowTest
 
 @export var move_speed := 20.0
 @export var lose_state: State 
-
-@onready var detection_area: Area2D = $"../../DetectionArea"
 
 func Enter() -> void:
 	

@@ -1,5 +1,4 @@
 extends State
-class_name IdleTest2
 
 var idle_timer: SceneTreeTimer
 
@@ -9,9 +8,6 @@ var idle_timer: SceneTreeTimer
 @export var move_speed: float = 0.0
 @export var timer_min: float = 0.5
 @export var timer_max: float = 5.0
-
-@onready var detection_area: Area2D = $"../../DetectionArea"
-
 
 func Enter() -> void:
 	
