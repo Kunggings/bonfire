@@ -1,27 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://sqqo0hlhdj31"]
+[gd_scene load_steps=11 format=3 uid="uid://cc626wkj1ap57"]
 
-[ext_resource type="Script" uid="uid://b2ssak0rclyix" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="2_4ra3w"]
+[ext_resource type="Script" uid="uid://c4agf765b1heh" path="res://scripts/enemy.gd" id="1_8lm2t"]
+[ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_j526r"]
+[ext_resource type="Script" uid="uid://dehmrkrblfj5s" path="res://scripts/state_machine.gd" id="3_vs03u"]
+[ext_resource type="Script" uid="uid://idneg5ndwsdv" path="res://scripts/idle.gd" id="4_3sl18"]
+[ext_resource type="Script" uid="uid://b12k7oadft3o8" path="res://scripts/follow.gd" id="5_nkmuh"]
+[ext_resource type="Script" uid="uid://6xkka75804xj" path="res://scripts/wander.gd" id="6_3sl18"]
+[ext_resource type="Script" uid="uid://b3rsilhuxhpsy" path="res://scripts/search.gd" id="7_vs03u"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lm2t"]
 size = Vector2(10, 10)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_choun"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h04x7"]
 cull_mode = 1
-polygon = PackedVector2Array(-25, -25, -25, 25, 25, 25, 25, -25)
+polygon = PackedVector2Array(-19, -19, -19, 18, 19, 18, 19, -19)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vg71"]
 radius = 200.0
 
 [node name="Enemy" type="CharacterBody2D"]
-z_index = 1
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_md0e3")
+script = ExtResource("1_8lm2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 1, 1)
-texture = ExtResource("2_4ra3w")
+modulate = Color(0.6715297, 5.2173735e-05, 0.535144, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_j526r")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
@@ -29,17 +34,44 @@ debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2.5, 2.5)
-shape = SubResource("RectangleShape2D_tipki")
+shape = SubResource("RectangleShape2D_8lm2t")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_choun")
+occluder = SubResource("OccluderPolygon2D_h04x7")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("CircleShape2D_md0e3")
+shape = SubResource("CircleShape2D_2vg71")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(100, 0)
 collide_with_areas = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_vs03u")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state", "wander_state")]
+script = ExtResource("4_3sl18")
+follow_state = NodePath("../Follow")
+wander_state = NodePath("../Wander")
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("lose_state")]
+script = ExtResource("5_nkmuh")
+lose_state = NodePath("../Search")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "follow_state", "wander_state")]
+script = ExtResource("6_3sl18")
+idle_state = NodePath("../Idle")
+follow_state = NodePath("../Follow")
+wander_state = NodePath(".")
+wander_percentage = 0.2
+
+[node name="Search" type="Node" parent="StateMachine" node_paths=PackedStringArray("arrived_state", "follow_state")]
+script = ExtResource("7_vs03u")
+arrived_state = NodePath("../Wander")
+follow_state = NodePath("../Follow")

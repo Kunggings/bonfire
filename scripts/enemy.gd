@@ -1,157 +1,42 @@
 extends CharacterBody2D
 
-enum EnemyState {
-	IDLE,
-	ACTIVE,
-	SEARCH
-}
-
-@export var enemy_state: EnemyState = EnemyState.IDLE
-
-@export var target: CharacterBody2D
-@export var speed: float = 20.0
-@export var acceleration: float = 400.0
-
-@export var idle_speed: float = 12.0
-@export var wander_radius: float = 80.0
-@export var idle_pause_time: float = 1.0
-
-@onready var agent: NavigationAgent2D = $NavigationAgent2D
+@export var target_body: CharacterBody2D
+var target: Vector2 = Vector2.ZERO
+@onready var state_machine = $StateMachine
 @onready var detection_area: Area2D = $DetectionArea
 @onready var line_of_sight: RayCast2D = $LineOfSight
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
-var target_in_range := false
-var has_line_of_sight := false
-var last_known_position: Vector2 = Vector2.ZERO
+var target_is_visible: bool = false
+var target_in_area: bool = false
 
-var idle_timer := 0.0
-var is_idling := true
-
-
-func _ready() -> void:
+func _ready():
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
-
-
-func _physics_process(delta: float) -> void:
-	match enemy_state:
-		EnemyState.IDLE:
-			_update_idle(delta)
-		EnemyState.ACTIVE:
-			_update_active(delta)
-		EnemyState.SEARCH:
-			_update_search(delta)
-
-
-# ======================
-# ACTIVE / CHASE
-# ======================
-func _update_active(delta: float) -> void:
-	if not target:
-		return
-
-	_update_line_of_sight()
-
-	if not target_in_range or not has_line_of_sight:
-		last_known_position = target.global_position
-		enemy_state = EnemyState.SEARCH
-		return
-
-	agent.target_position = target.global_position
-
-	if agent.is_navigation_finished():
-		velocity = velocity.move_toward(Vector2.ZERO, acceleration * delta)
-		move_and_slide()
-		return
-
-	var next_point := agent.get_next_path_position()
+	
+func _physics_process(_delta: float) -> void:
+	
+	if target_in_area:
+		line_of_sight.target_position = line_of_sight.to_local(target_body.global_position)
+		line_of_sight.force_raycast_update()
+		
+		if line_of_sight.is_colliding():
+			if line_of_sight.get_collider() == target_body:
+				target_is_visible = true
+			else:
+				target_is_visible = false
+	
+	nav_agent.target_position = target
+	var next_point := nav_agent.get_next_path_position()
 	var direction := (next_point - global_position).normalized()
-	var desired_velocity := direction * speed
-	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+	velocity = direction * state_machine.current_state.move_speed
 	move_and_slide()
-
-
-# ======================
-# SEARCH
-# ======================
-func _update_search(delta: float) -> void:
-	if agent.is_navigation_finished():
-		enemy_state = EnemyState.IDLE
-		is_idling = true
-		idle_timer = idle_pause_time
-		return
-
-	var next_point := agent.get_next_path_position()
-	var direction := (next_point - global_position).normalized()
-	var desired_velocity := direction * speed
-	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
-	move_and_slide()
-
-
-# ======================
-# IDLE / WANDER
-# ======================
-func _update_idle(delta: float) -> void:
-	if is_idling:
-		idle_timer -= delta
-		velocity = velocity.move_toward(Vector2.ZERO, acceleration * delta)
-		move_and_slide()
-
-		if idle_timer <= 0.0:
-			_set_new_wander_target()
-		return
-
-	if agent.is_navigation_finished():
-		is_idling = true
-		idle_timer = idle_pause_time
-		return
-
-	var next_point := agent.get_next_path_position()
-	var direction := (next_point - global_position).normalized()
-	var desired_velocity := direction * idle_speed
-	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
-	move_and_slide()
-
-
-func _set_new_wander_target() -> void:
-	is_idling = false
-	var random_offset := Vector2(
-		randf_range(-wander_radius, wander_radius),
-		randf_range(-wander_radius, wander_radius)
-	)
-	agent.target_position = global_position + random_offset
-
-
-# ======================
-# LINE OF SIGHT
-# ======================
-func _update_line_of_sight() -> void:
-	if not target_in_range:
-		has_line_of_sight = false
-		return
-
-	line_of_sight.target_position = line_of_sight.to_local(target.global_position)
-	line_of_sight.force_raycast_update()
-
-	if line_of_sight.is_colliding():
-		has_line_of_sight = line_of_sight.get_collider() == target
-	else:
-		has_line_of_sight = false
-
-
-# ======================
-# DETECTION
-# ======================
+	
 func _on_body_entered(body: Node) -> void:
-	if body == target:
-		enemy_state = EnemyState.ACTIVE
-		target_in_range = true
-		is_idling = false
-
+	if body == target_body:
+		target_in_area = true
 
 func _on_body_exited(body: Node) -> void:
-	if body == target:
-		target_in_range = false
-		has_line_of_sight = false
-		last_known_position = target.global_position
-		enemy_state = EnemyState.SEARCH
+	if body == target_body:
+		target_in_area = false
+		target_is_visible = false
