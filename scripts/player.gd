@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var move_speed: float = 50.0
 @export var sprint_speed: float = 100.0
+@export var current_speed: float = 100.0
 
 @export var max_health: float = 100.0
 @export var current_health: float = 100.0
@@ -20,15 +21,21 @@ func _input(event):
 		try_grab()
 	elif event.is_action_released("Hold"):
 		drop_item()
+		
 
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction := Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	).normalized()
+	
+	if Input.is_action_pressed("Sprint"):
+		current_speed = sprint_speed
+	else:
+		current_speed = move_speed
 
-	velocity = direction * move_speed
+	print(current_speed)
+	velocity = direction * current_speed
 	move_and_slide()
 
 	if held_item and Input.is_action_pressed("Hold"):

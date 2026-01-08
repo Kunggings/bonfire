@@ -56,9 +56,11 @@ initial_state = NodePath("IdlePlayer")
 script = ExtResource("4_tuyoq")
 move = NodePath("../MovePlayer")
 
-[node name="MovePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+[node name="MovePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sprint")]
 script = ExtResource("5_qlg0r")
 idle = NodePath("../IdlePlayer")
+sprint = NodePath("../SprintPlayer")
 
-[node name="SprintPlayer" type="Node" parent="StateMachine"]
+[node name="SprintPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
 script = ExtResource("7_fjrip")
+idle = NodePath("../IdlePlayer")

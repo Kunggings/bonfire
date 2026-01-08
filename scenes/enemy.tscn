@@ -16,7 +16,7 @@ cull_mode = 1
 polygon = PackedVector2Array(-19, -19, -19, 18, 19, 18, 19, -19)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vg71"]
-radius = 200.0
+radius = 150.0
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
