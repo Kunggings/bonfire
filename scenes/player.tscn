@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=9 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://biaqp0lcnatka" path="res://scripts/player.gd" id="1_tou0u"]
+[ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scenes/playerTest.gd" id="1_dqkch"]
+[ext_resource type="Script" uid="uid://dehmrkrblfj5s" path="res://scripts/state_machine.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://b2vluqleyfo71" path="res://scripts/idle_player.gd" id="4_tuyoq"]
+[ext_resource type="Script" uid="uid://crp0718oyfxxl" path="res://scripts/move_player.gd" id="5_qlg0r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -16,7 +19,7 @@ radius = 124.004036
 collision_mask = 6
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_tou0u")
+script = ExtResource("1_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7dm0k")
@@ -27,7 +30,7 @@ texture = ExtResource("1_4flbx")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="."]
 top_level = true
 
 [node name="HealthDrainTimer" type="Timer" parent="."]
@@ -39,3 +42,15 @@ collision_mask = 8
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hold-Area2D"]
 shape = SubResource("CircleShape2D_n0leu")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_qlg0r")
+initial_state = NodePath("IdlePlayer")
+
+[node name="IdlePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("move")]
+script = ExtResource("4_tuyoq")
+move = NodePath("../MovePlayer")
+
+[node name="MovePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("5_qlg0r")
+idle = NodePath("../IdlePlayer")

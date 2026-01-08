@@ -51,6 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
+visible = false
 z_index = 830
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -72,6 +73,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="FPS Counter" type="Label" parent="UI"]
 offset_right = 40.0
@@ -93,6 +95,7 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 

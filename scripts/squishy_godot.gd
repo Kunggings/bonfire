@@ -10,7 +10,6 @@ func pickupSound():
 		pickup_audio.stream = pickup_sound
 		pickup_audio.play()
 
-	print("turn light on")
 	point_light_2d.enabled = true
 
 
