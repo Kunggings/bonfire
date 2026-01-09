@@ -26,16 +26,6 @@ func Physics_Update(_delta: float) -> void:
 	
 	if owner.target_is_visible == true:
 		Transitioned.emit(self, follow_state.name)
-	
-#func generate_wander_target() -> Vector2:
-	#var shape = detection_area.get_node("CollisionShape2D").shape
-	#var radius = shape.radius
-#
-	#var angle = randf() * TAU
-	#var distance = sqrt(randf()) * radius
-	#var offset = Vector2(cos(angle), sin(angle)) * distance
-#
-	#return detection_area.global_position + offset
 
 func generate_wander_target_map() -> Vector2:
 	var shape = detection_area.get_node("CollisionShape2D").shape

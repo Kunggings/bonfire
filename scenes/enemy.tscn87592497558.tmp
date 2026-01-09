@@ -62,10 +62,9 @@ wander_state = NodePath("../Wander")
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("lose_state", "attack_state")]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("lose_state")]
 script = ExtResource("5_nkmuh")
 lose_state = NodePath("../Search")
-attack_state = NodePath("../Attack")
 
 [node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "follow_state", "wander_state")]
 script = ExtResource("6_3sl18")

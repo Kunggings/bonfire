@@ -26,7 +26,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	bonfire_lit = true
 
-	print("Bonfire")
+	#print("Bonfire Lit")
 	
 	$BonfireLitSound.play()
 	$BonfireSound.play()

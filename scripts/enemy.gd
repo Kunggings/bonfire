@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 	var next_point := nav_agent.get_next_path_position()
 	var direction := (next_point - global_position).normalized()
 	velocity = direction * state_machine.current_state.move_speed
+	
 	move_and_slide()
 	
 func _on_body_entered(body: Node) -> void:
