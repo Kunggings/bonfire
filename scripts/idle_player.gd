@@ -7,12 +7,15 @@ extends State
 func Enter() -> void:
 	owner.move_speed = move_speed
 	owner.health_drain = health_drain
+	
 
 func Exit() -> void:
 
 	pass
 
 func Physics_Update(_delta: float) -> void:
+		
+	owner.animation.play("Idle")
 
 	if owner.direction != Vector2.ZERO:
 		Transitioned.emit(self, move.name)

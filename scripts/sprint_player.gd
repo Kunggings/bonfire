@@ -14,6 +14,13 @@ func Exit() -> void:
 	pass
 
 func Physics_Update(_delta: float) -> void:
+	
+	if owner.velocity.x < 0:
+		owner.animation.flip_h = true
+	elif owner.velocity.x > 0:
+		owner.animation.flip_h = false
+
+	owner.animation.play("Sprint")
 
 	if not Input.is_action_pressed("Sprint"): 
 			Transitioned.emit(self, idle.name)

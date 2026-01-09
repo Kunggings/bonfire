@@ -18,8 +18,15 @@ func Enter():
 	dash_timer.wait_time = dash_duration
 	dash_timer.start()
 
-func Physics_Update(delta):
-	pass
+func Physics_Update(_delta) -> void:
+	
+	if owner.velocity.x < 0:
+		owner.animation.flip_h = true
+	elif owner.velocity.x > 0:
+		owner.animation.flip_h = false
+		
+	owner.animation.play("Dash")
+
 
 func _ready():
 	dash_timer.timeout.connect(_on_dash_timeout)
