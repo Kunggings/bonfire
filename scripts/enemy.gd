@@ -39,7 +39,6 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	
-	
 func _on_body_entered(body: Node) -> void:
 	if body == target_body:
 		target_in_area = true

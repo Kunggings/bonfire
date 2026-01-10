@@ -23,7 +23,7 @@ func Enter() -> void:
 
 func Physics_Update(_delta: float) -> void:
 	
-	owner.animate.play("Attack")
+	owner.animation.play("Attack")
 	
 	
 func _on_attack_timeout():

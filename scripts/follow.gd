@@ -16,7 +16,7 @@ func Exit() -> void:
 
 func Physics_Update(_delta: float) -> void:	
 
-	owner.animate.play("Walk")
+	owner.animation.play("Walk")
 
 	owner.target = owner.target_body.global_position
 	
