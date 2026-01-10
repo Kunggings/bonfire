@@ -4,18 +4,21 @@ extends State
 @export var dash: State
 @export var move_speed : float = 100.0
 @export var health_drain : float = 2.0
+@onready var run_sound: AudioStreamPlayer2D = $"../../RunSound"
 
 func Enter() -> void:
 	owner.move_speed = move_speed
 	owner.health_drain = health_drain
+	run_sound.play()
 
 func Exit() -> void:
-
-	pass
+	run_sound.stop()
+	
 
 func Physics_Update(_delta: float) -> void:
 
 	owner.animation.play("Sprint")
+	
 
 	if not Input.is_action_pressed("Sprint"): 
 			Transitioned.emit(self, idle.name)
