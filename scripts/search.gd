@@ -12,6 +12,8 @@ func Enter() -> void:
 
 func Physics_Update(_delta: float) -> void:
 	
+	owner.animate.play("Walk")
+	
 	if owner.target.distance_to(owner.global_position) <= 20 :
 		Transitioned.emit(self, arrived_state.name)
 	

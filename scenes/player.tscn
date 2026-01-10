@@ -232,8 +232,10 @@ texture = ExtResource("1_4flbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_jc3p3")
-animation = &"Idle"
+animation = &"Dash"
 autoplay = "Idle"
+frame = 4
+frame_progress = 0.060415868
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
@@ -279,7 +281,6 @@ return_state = NodePath("../IdlePlayer")
 [node name="DashTimer" type="Timer" parent="StateMachine/DashPlayer"]
 
 [node name="State Label" type="Label" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

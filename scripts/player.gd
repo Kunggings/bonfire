@@ -33,6 +33,12 @@ func _physics_process(_delta: float) -> void:
 	
 
 	velocity = direction * move_speed
+	
+	if velocity.x < 0:
+		animation.flip_h = true
+	elif velocity.x > 0:
+		animation.flip_h = false
+		
 	move_and_slide()
 
 	if held_item and Input.is_action_pressed("Hold"):

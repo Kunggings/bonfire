@@ -26,6 +26,8 @@ func Exit() -> void:
 
 func Physics_Update(_delta: float) -> void:
 
+	owner.animate.play("Idle")
+
 	if owner.target_is_visible:
 		Transitioned.emit(self, follow_state.name)
 

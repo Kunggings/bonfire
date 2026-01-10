@@ -16,10 +16,6 @@ func Exit() -> void:
 
 func Physics_Update(_delta: float) -> void:
 	
-	if owner.velocity.x < 0:
-		owner.animation.flip_h = true
-	elif owner.velocity.x > 0:
-		owner.animation.flip_h = false
 	
 	owner.animation.play("Walk")
 	

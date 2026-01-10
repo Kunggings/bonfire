@@ -93,6 +93,7 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 

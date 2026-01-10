@@ -6,6 +6,7 @@ var target: Vector2 = Vector2.ZERO
 @onready var detection_area: Area2D = $DetectionArea
 @onready var line_of_sight: RayCast2D = $LineOfSight
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
 var target_is_visible: bool = false
 var target_in_area: bool = false
@@ -31,7 +32,13 @@ func _physics_process(_delta: float) -> void:
 	var direction := (next_point - global_position).normalized()
 	velocity = direction * state_machine.current_state.move_speed
 	
+	if velocity.x < 0:
+		animation.flip_h = true
+	elif velocity.x > 0:
+		animation.flip_h = false
+	
 	move_and_slide()
+	
 	
 func _on_body_entered(body: Node) -> void:
 	if body == target_body:
