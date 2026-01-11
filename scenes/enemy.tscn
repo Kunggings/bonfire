@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cc626wkj1ap57"]
+[gd_scene load_steps=39 format=3 uid="uid://cc626wkj1ap57"]
 
 [ext_resource type="Script" uid="uid://c4agf765b1heh" path="res://scripts/enemy.gd" id="1_8lm2t"]
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_j526r"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://b3rsilhuxhpsy" path="res://scripts/search.gd" id="7_vs03u"]
 [ext_resource type="Script" uid="uid://bos8yejoyrwqf" path="res://scenes/attack.gd" id="8_md484"]
 [ext_resource type="Script" uid="uid://cyyrqbdvs81cv" path="res://scripts/label.gd" id="9_ipns3"]
+[ext_resource type="AudioStream" uid="uid://citnp3ltg2js2" path="res://audio/Character/footsteps-dirt-gravel-6823.mp3" id="13_wtq4b"]
+[ext_resource type="AudioStream" uid="uid://dtg1sh4mhfaga" path="res://audio/Character/hitting-stalactites-with-axe-212652.mp3" id="14_j0cyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0wcc"]
 atlas = ExtResource("2_otmr2")
@@ -264,3 +266,13 @@ offset_right = 20.0
 offset_bottom = -34.0
 grow_horizontal = 2
 script = ExtResource("9_ipns3")
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_wtq4b")
+volume_db = 10.0
+max_distance = 500.0
+parameters/looping = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_j0cyh")
+max_distance = 300.0

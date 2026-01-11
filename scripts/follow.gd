@@ -4,15 +4,15 @@ extends State
 @export var lose_state: State 
 @export var attack_state: State
 @onready var attack: Node = $"../Attack"
+@onready var walk_sound: AudioStreamPlayer2D = $"../../WalkSound"
 
 func Enter() -> void:
-	
-	pass
+	walk_sound.play()
+
 
 
 func Exit() -> void:
-	
-	pass
+	walk_sound.stop()
 
 func Physics_Update(_delta: float) -> void:	
 

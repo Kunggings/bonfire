@@ -7,7 +7,7 @@ extends State
 @export var attack_range : float = 25.0
 @export var attack_duration: float = 1.5
 @onready var attack_timer: Timer = $AttackTimer
-
+@onready var attack_sound: AudioStreamPlayer2D = $"../../AttackSound"
 
 var wander_location : Vector2
 
@@ -16,6 +16,7 @@ func _ready():
 
 func Enter() -> void:
 	
+	attack_sound.play()
 	attack_timer.wait_time = attack_duration
 	attack_timer.start()
 	

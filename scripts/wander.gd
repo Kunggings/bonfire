@@ -9,12 +9,17 @@ extends State
 var wander_location : Vector2
 
 @onready var nav_agent: NavigationAgent2D = $"../../NavigationAgent2D"
-
+@onready var walk_sound: AudioStreamPlayer2D = $"../../WalkSound"
 @onready var detection_area: Area2D = $"../../DetectionArea"
 
 func Enter() -> void:
 	
+	walk_sound.play()
 	owner.target = generate_wander_target_map()
+	
+func Exit() -> void:
+	walk_sound.stop()
+
 
 func Physics_Update(_delta: float) -> void:
 	

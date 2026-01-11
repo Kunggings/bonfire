@@ -5,9 +5,14 @@ extends State
 @export var follow_state: State
 
 var wander_location : Vector2
+@onready var walk_sound: AudioStreamPlayer2D = $"../../WalkSound"
 
 func Enter() -> void:
 	owner.target = owner.target_body.global_position
+	walk_sound.play()
+
+func Exit() -> void:
+	walk_sound.stop()
 
 
 func Physics_Update(_delta: float) -> void:

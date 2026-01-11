@@ -12,8 +12,8 @@
 [ext_resource type="Script" uid="uid://4ldqu26tw3gs" path="res://scripts/sprint_player.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://cyyrqbdvs81cv" path="res://scripts/label.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://dncri7hr2khjv" path="res://scripts/dash_player.gd" id="8_ur7pv"]
-[ext_resource type="AudioStream" uid="uid://s17ybydaaij" path="res://audio/moving/running-on-dirt-87203.mp3" id="13_f1ej7"]
-[ext_resource type="AudioStream" uid="uid://citnp3ltg2js2" path="res://audio/moving/footsteps-dirt-gravel-6823.mp3" id="13_jej6c"]
+[ext_resource type="AudioStream" uid="uid://s17ybydaaij" path="res://audio/Character/running-on-dirt-87203.mp3" id="13_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://citnp3ltg2js2" path="res://audio/Character/footsteps-dirt-gravel-6823.mp3" id="13_jej6c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
