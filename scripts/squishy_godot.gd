@@ -14,8 +14,5 @@ func pickupSound():
 
 
 func putdownSound():
-	if putdown_sound:
-		putdown_audio.stream = putdown_sound
-		putdown_audio.play()
 
 	point_light_2d.enabled = false
