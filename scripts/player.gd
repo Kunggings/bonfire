@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var move_speed: float = 50.0
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
+
 @export var max_health: float = 100.0
 @export var current_health: float = 100.0
 var health_drain: float = 1.0
@@ -44,9 +45,6 @@ func _physics_process(_delta: float) -> void:
 	if held_item and Input.is_action_pressed("Hold"):
 		held_item.global_position = global_position + held_item_offset
 
-	if current_health <= 0.0:
-		die()
-
 func _on_health_drain_timer_timeout() -> void:
 	current_health = clamp(
 		current_health - health_drain,
@@ -82,6 +80,3 @@ func drop_item():
 func heal(amount: float) -> void:
 	if held_item is Lamp:
 		current_health = clamp(current_health + amount, 0.0, max_health)
-
-func die() -> void:
-	get_tree().reload_current_scene()

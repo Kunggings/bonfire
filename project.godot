@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="bonfire"
-run/main_scene="uid://b66yo8cfbh81s"
+run/main_scene="uid://bwpygdwyubqac"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [audio]

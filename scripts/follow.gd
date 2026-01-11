@@ -20,7 +20,7 @@ func Physics_Update(_delta: float) -> void:
 
 	owner.target = owner.target_body.global_position
 	
-	if owner.global_position.distance_to(owner.target_body.global_position) < attack.attack_range:
+	if owner.global_position.distance_to(owner.target_body.global_position) < attack.attack_range &&owner.target_body.current_health != 0.0:
 		Transitioned.emit(self, attack_state.name)
 	
 	if not owner.target_is_visible:

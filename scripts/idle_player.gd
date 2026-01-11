@@ -3,6 +3,7 @@ extends State
 @export var move: State
 @export var move_speed : float = 0.0
 @export var health_drain : float = 0.5
+@export var death:State
 
 func Enter() -> void:
 	owner.move_speed = move_speed
@@ -20,3 +21,5 @@ func Physics_Update(_delta: float) -> void:
 	if owner.direction != Vector2.ZERO:
 		Transitioned.emit(self, move.name)
 		
+	if owner.current_health <= 0.0:
+			Transitioned.emit(self, death.name)	
