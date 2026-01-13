@@ -28,8 +28,8 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	direction = Vector2(
-		Input.get_axis("left", "right"),
-		Input.get_axis("up", "down")
+		Input.get_axis("Left", "Right"),
+		Input.get_axis("Up", "Down")
 	).normalized()
 	
 

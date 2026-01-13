@@ -1,0 +1,143 @@
+[gd_scene load_steps=5 format=3 uid="uid://mbjl0lm3w6fx"]
+
+[ext_resource type="Script" uid="uid://crhtrx51yf3a" path="res://scripts/settings_menu.gd" id="1_05p07"]
+[ext_resource type="PackedScene" uid="uid://cgprjhauyetob" path="res://scenes/hot_key_rebind_button.tscn" id="2_cr101"]
+[ext_resource type="PackedScene" uid="uid://oeckm6nucm2u" path="res://scenes/window_mode_button.tscn" id="3_wswnh"]
+[ext_resource type="PackedScene" uid="uid://cqccv4fd67bqc" path="res://scenes/window_size_button.tscn" id="4_labj1"]
+
+[node name="Settings_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_05p07")
+
+[node name="Back Button" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -57.0
+offset_right = 18.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back
+"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -446.0
+offset_top = -225.0
+offset_right = 454.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HotKey_Rebind_Button" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Up"
+
+[node name="HotKey_Rebind_Button2" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Left"
+
+[node name="HotKey_Rebind_Button3" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Down"
+
+[node name="HotKey_Rebind_Button4" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Right"
+
+[node name="HotKey_Rebind_Button5" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Hold"
+
+[node name="HotKey_Rebind_Button6" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Sprint"
+
+[node name="HotKey_Rebind_Button8" parent="TabContainer/Controls/MarginContainer/VBoxContainer" instance=ExtResource("2_cr101")]
+layout_mode = 2
+action_name = "Dash"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Window Mode Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("3_wswnh")]
+layout_mode = 2
+
+[node name="Window Size Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("4_labj1")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
