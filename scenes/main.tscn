@@ -32,7 +32,7 @@ height = 16
 noise = SubResource("FastNoiseLite_ya4ey")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_trceg"]
-frequency = 0.0143
+frequency = 0.35
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a8y0u"]
 noise = SubResource("FastNoiseLite_trceg")
