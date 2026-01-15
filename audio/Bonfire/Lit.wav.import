@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5i8nsn5y0oj7"
-path="res://.godot/imported/Lit.wav-5d0cc66ef2e74527dd26f03f9174b005.sample"
+path="res://.godot/imported/Lit.wav-1cee0796cca5614ebb362934bb9f050c.sample"
 
 [deps]
 
-source_file="res://audio/bonfire/Lit.wav"
-dest_files=["res://.godot/imported/Lit.wav-5d0cc66ef2e74527dd26f03f9174b005.sample"]
+source_file="res://audio/Bonfire/Lit.wav"
+dest_files=["res://.godot/imported/Lit.wav-1cee0796cca5614ebb362934bb9f050c.sample"]
 
 [params]
 

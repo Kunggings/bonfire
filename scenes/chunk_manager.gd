@@ -7,48 +7,42 @@ class_name ChunkManager
 var tile_size := tile_set.tile_size.x
 var chunk_load_radius := 1
 
-var generated_chunks: Array[Chunk] = []
-var drawn_chunks: Array[Chunk] = []
+var generated_chunks: Dictionary[Vector2i, Chunk] = {}
+var drawn_chunks: Dictionary[Vector2i, Chunk] = {}
 
 @onready var player: Player = $"../Player"
-@onready var player_chunk = world_to_chunk_pos(player.global_position)
+@onready var player_chunk: Vector2i = world_to_chunk_pos(player.global_position)
+var prev_player_chunk := Vector2i.MAX
+
 
 func _physics_process(_delta: float) -> void:
 	player_chunk = world_to_chunk_pos(player.global_position)
 
-	generate_chunks_around_player(player_chunk)
+	if prev_player_chunk != player_chunk:
+		generate_chunks_around_player(player_chunk)
+		prev_player_chunk = player_chunk
+
 	unload_check()
-	
+
+
 func generate_chunks_around_player(_player_chunk: Vector2i) -> void:
 	for y_offset in range(-chunk_load_radius, chunk_load_radius + 1):
 		for x_offset in range(-chunk_load_radius, chunk_load_radius + 1):
 			var chunk_pos := _player_chunk + Vector2i(x_offset, y_offset)
-			
-			if not is_chunk_generated(chunk_pos):
+
+			if not generated_chunks.has(chunk_pos):
 				generate_chunk(chunk_pos)
-				draw_chunk(generated_chunks.back(), 1)
-			else:
-				var chunk := get_generated_chunk(chunk_pos)
-				draw_chunk(chunk, 1)
+
+			draw_chunk(chunk_pos, 1)
+
 
 func unload_check() -> void:
-	for chunk in drawn_chunks.duplicate():
-		var delta = chunk.chunk_pos - player_chunk
+	for chunk in drawn_chunks:
+		var delta = drawn_chunks[chunk].chunk_pos - player_chunk
 
 		if abs(delta.x) > 2 or abs(delta.y) > 2:
-			remove_chunk(chunk)
+			remove_chunk(drawn_chunks[chunk].chunk_pos)
 
-func get_generated_chunk(chunk_pos: Vector2i) -> Chunk:
-	for chunk in generated_chunks:
-		if chunk.chunk_pos == chunk_pos:
-			return chunk
-	return null	
-
-func is_chunk_generated(chunk_pos: Vector2i) -> bool:
-	for c in generated_chunks:
-		if c.chunk_pos == chunk_pos:
-			return true
-	return false
 
 func world_to_chunk_pos(world_pos: Vector2) -> Vector2i:
 	var tile_x = floor(world_pos.x / tile_size)
@@ -59,10 +53,10 @@ func world_to_chunk_pos(world_pos: Vector2) -> Vector2i:
 		floor(tile_y / chunk_size)
 	)
 
+
 func generate_chunk(chunk_pos: Vector2i) -> void:
-	for c in generated_chunks:
-		if c.chunk_pos == chunk_pos:
-			return
+	if generated_chunks.has(chunk_pos):
+		return
 
 	var chunk := Chunk.new(
 		chunk_pos,
@@ -74,9 +68,15 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 	add_child(chunk)
 	chunk.generate()
 
-	generated_chunks.append(chunk)
+	generated_chunks[chunk_pos] = chunk
+	print("%v generated" % chunk_pos)
 
-func draw_chunk(chunk: Chunk, tile_map_id: int) -> void:
+
+func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
+	if drawn_chunks.has(chunk_pos):
+		return
+
+	var chunk: Chunk = generated_chunks[chunk_pos]
 	var chunk_origin := chunk.chunk_pos * chunk_size
 
 	for y in range(chunk_size):
@@ -95,10 +95,12 @@ func draw_chunk(chunk: Chunk, tile_map_id: int) -> void:
 				atlas_coords
 			)
 
-	drawn_chunks.append(chunk)
+	drawn_chunks[chunk_pos] = chunk
+	print("%v drawn" % chunk_pos)
 
-func remove_chunk(chunk: Chunk) -> void:
-	var chunk_origin := chunk.chunk_pos * chunk_size
+
+func remove_chunk(chunk_pos: Vector2i) -> void:
+	var chunk_origin := chunk_pos * chunk_size
 
 	for y in range(chunk_size):
 		for x in range(chunk_size):
@@ -109,4 +111,5 @@ func remove_chunk(chunk: Chunk) -> void:
 
 			erase_cell(tile_pos)
 
-	drawn_chunks.erase(chunk)
+	drawn_chunks.erase(chunk_pos)
+	print("%v removed" % chunk_pos)

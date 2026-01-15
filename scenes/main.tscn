@@ -107,6 +107,10 @@ scale = Vector2(0.5, 0.5)
 max_health = 10000.0
 current_health = 10000.0
 
+[node name="PlayerCamera" parent="Player" index="4"]
+zoom_in_amount = 0.265
+zoom_out_amount = 1.015
+
 [node name="Bonfire" parent="." instance=ExtResource("5_choun")]
 position = Vector2(335, 216)
 
@@ -154,8 +158,9 @@ target_body = NodePath("../Player")
 [node name="Chunk Manager" type="TileMapLayer" parent="."]
 tile_set = ExtResource("10_ya4ey")
 script = ExtResource("19_gqmmt")
-chunk_size = 12
 floor_noise = SubResource("FastNoiseLite_yc10j")
 
 [node name="Chunk" type="Node" parent="."]
 script = ExtResource("19_0ld40")
+
+[editable path="Player"]

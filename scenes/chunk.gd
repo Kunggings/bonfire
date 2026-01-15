@@ -8,6 +8,7 @@ var floor_threshold: float = 0.5
 
 var tiles: Array[Vector2i] = []
 
+
 func _init(
 	_chunk_pos: Vector2i,
 	_chunk_size: int,
@@ -18,6 +19,7 @@ func _init(
 	chunk_size = _chunk_size
 	floor_noise = _noise
 	floor_threshold = _threshold
+
 
 func generate() -> void:
 	tiles.clear()
@@ -33,6 +35,11 @@ func generate() -> void:
 			var index = x + y * chunk_size
 
 			if noise_val < floor_threshold:
-				tiles[index] = Vector2i(1, 1) 
+				tiles[index] = Vector2i(1, 1)
 			else:
 				tiles[index] = Vector2i(2, 2)
+
+	# var label = Label.new()
+	# label.text = "%s, %s" % [chunk_pos.x, chunk_pos.y]
+	# label.global_position = chunk_pos * chunk_size * 32
+	# add_child(label)
