@@ -27,6 +27,9 @@ func _physics_process(_delta: float) -> void:
 			else:
 				target_is_visible = false
 	
+	if target_body.current_health <= 0 :
+		target_is_visible = false
+	
 	nav_agent.target_position = target
 	var next_point := nav_agent.get_next_path_position()
 	var direction := (next_point - global_position).normalized()

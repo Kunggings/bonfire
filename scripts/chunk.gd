@@ -4,7 +4,10 @@ class_name Chunk
 var chunk_pos: Vector2i
 var chunk_size: int
 var floor_noise: FastNoiseLite
-var floor_threshold: float = 0.5
+var floor_threshold: float 
+var grass_threshold: float
+var stone_threshold: float
+
 
 var tiles: Array[Vector2i] = []
 
@@ -23,21 +26,29 @@ static var grass_atlas: Array[Vector2i] = [
 ]
 
 static var stone_atlas: Array[Vector2i] = [
-	Vector2i(0,4), Vector2i(0,5), Vector2i(0,6), Vector2i(0,7),
-	Vector2i(1,4), Vector2i(1,5), Vector2i(1,6), Vector2i(1,7)
+	Vector2i(0,4), Vector2i(0,5), Vector2i(0,6),
+	Vector2i(1,4), Vector2i(1,5), Vector2i(1,6), 
 ]
 
+static var broken_atlas: Array[Vector2i] = [
+	Vector2i(2,4), Vector2i(3,4), Vector2i(4,4), Vector2i(5,4), Vector2i(6,4), Vector2i(7,4),
+	Vector2i(2,5), Vector2i(3,5), Vector2i(4,5), Vector2i(5,5), Vector2i(6,5), Vector2i(7,5),
+	Vector2i(2,6), Vector2i(3,6), Vector2i(4,6), Vector2i(5,6), Vector2i(6,6), Vector2i(7,6),
+	Vector2i(2,7), Vector2i(3,7), Vector2i(4,7), Vector2i(5,7),
+]
 
 func _init(
 	_chunk_pos: Vector2i,
 	_chunk_size: int,
 	_noise: FastNoiseLite,
-	_threshold: float = 0.0
+	_stone_threshold: float,
+	_grass_threshold: float
 ) -> void:
 	chunk_pos = _chunk_pos
 	chunk_size = _chunk_size
 	floor_noise = _noise
-	floor_threshold = _threshold
+	stone_threshold = _stone_threshold
+	grass_threshold = _grass_threshold
 
 
 func generate() -> void:
@@ -47,16 +58,18 @@ func generate() -> void:
 	for y in range(chunk_size):
 		for x in range(chunk_size):
 			var world_x = x + chunk_pos.x * chunk_size
-			var world_y = y + chunk_pos.y * chunk_size
+			var world_y = y + chunk_pos.y * chunk_size 
 
 			var noise_val = floor_noise.get_noise_2d(world_x, world_y)
 
 			var index = x + y * chunk_size
 
-			if noise_val < floor_threshold:
+			if noise_val > grass_threshold:
 				tiles[index] = grass_atlas.pick_random()
-			else: 
+			elif noise_val < stone_threshold:
 				tiles[index] = stone_atlas.pick_random()
+			else: 
+				tiles[index] = broken_atlas.pick_random()
 
 	# var label = Label.new()
 	# label.text = "%s, %s" % [chunk_pos.x, chunk_pos.y]

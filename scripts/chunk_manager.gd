@@ -3,7 +3,9 @@ class_name ChunkManager
 
 @export var chunk_size: int = 4
 @export var floor_noise: FastNoiseLite
-@export var floor_threshold: float = 0.5
+@export var grass_threshold: float = 0.1
+@export var stone_threshold: float = -0.1
+
 var tile_size := tile_set.tile_size.x
 var chunk_load_radius := 1
 
@@ -62,7 +64,8 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 		chunk_pos,
 		chunk_size,
 		floor_noise,
-		floor_threshold
+		stone_threshold,
+		grass_threshold
 	)
 
 	add_child(chunk)
