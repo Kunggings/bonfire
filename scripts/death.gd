@@ -11,6 +11,7 @@ func _ready():
 func Enter() -> void:
 	owner.move_speed = move_speed
 	owner.animation.play("Death")
+	owner.drop_item()
 	
 	death_timer.wait_time = death_duration
 	death_timer.start()

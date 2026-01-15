@@ -52,7 +52,7 @@ func _on_health_drain_timer_timeout() -> void:
 	)
 
 func try_grab():
-	if held_item:
+	if held_item or current_health <= 0:
 		return
 
 	var closest_body: StaticBody2D = null

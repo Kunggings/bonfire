@@ -114,6 +114,7 @@ bonfire_scene = ExtResource("5_choun")
 map_size = 500
 
 [node name="Squishy Godot" parent="." instance=ExtResource("13_trceg")]
+z_index = 1
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("16_jbj1t")
