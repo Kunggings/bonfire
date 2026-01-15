@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene load_steps=47 format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scripts/player.gd" id="1_tuyoq"]
@@ -247,10 +247,19 @@ animations = [{
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oul6g"]
 cull_mode = 1
-polygon = PackedVector2Array(-16, -24, -18, 16, -9, 24, -1, 24, 13, 24, 18, 13, 16, -25, 3, -36)
+polygon = PackedVector2Array(-14, -22, -15, 8, -5, 17, 3, 17, 10, 17, 15, 9, 15, -6, 11, -26, 2, -31)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n0leu"]
 radius = 124.004036
+
+[sub_resource type="Gradient" id="Gradient_oprun"]
+offsets = PackedFloat32Array(0, 0.7241379)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8ls1"]
+gradient = SubResource("Gradient_oprun")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -268,10 +277,8 @@ texture = ExtResource("1_4flbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_jc3p3")
-animation = &"Death"
+animation = &"Dash"
 autoplay = "Idle"
-frame = 3
-frame_progress = 0.7971036
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_oul6g")
@@ -343,3 +350,9 @@ parameters/looping = true
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_jej6c")
 parameters/looping = true
+
+[node name="Player Light" type="PointLight2D" parent="."]
+color = Color(1, 1, 1, 0.047058824)
+energy = 3.0
+texture = SubResource("GradientTexture2D_a8ls1")
+texture_scale = 5.5

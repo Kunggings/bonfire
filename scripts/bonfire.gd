@@ -1,4 +1,5 @@
 extends Area2D
+@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
 @export var lit_texture := preload("res://textures/bonfire.png")
 @export var heal_amount: float = 50.0
@@ -26,7 +27,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	bonfire_lit = true
 
-	#print("Bonfire Lit")
+	gpu_particles_2d.emitting = true
 	
 	$BonfireLitSound.play()
 	$BonfireSound.play()

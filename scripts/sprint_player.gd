@@ -23,7 +23,7 @@ func Physics_Update(_delta: float) -> void:
 	if not Input.is_action_pressed("Sprint") or owner.direction == Vector2.ZERO: 
 			Transitioned.emit(self, idle.name)
 	
-	if Input.is_action_just_pressed("Dash") and owner.current_health >= 1.5 * dash.health_cost:
+	if Input.is_action_just_pressed("Dash") and owner.current_health >= 1.5 * dash.health_cost and owner.held_item == null:
 		Transitioned.emit(self, dash.name)
 
 	if owner.current_health <= 0.0:

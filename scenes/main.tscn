@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=31 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
@@ -37,6 +37,41 @@ frequency = 0.35
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a8y0u"]
 noise = SubResource("FastNoiseLite_trceg")
 
+[sub_resource type="Curve" id="Curve_muem4"]
+_data = [Vector2(0.59052926, 0.77292573), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.7612514, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_muem4"]
+curve = SubResource("Curve_muem4")
+
+[sub_resource type="Gradient" id="Gradient_0ld40"]
+offsets = PackedFloat32Array(0.6246246, 0.8738739, 1)
+colors = PackedColorArray(1, 0.5294118, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dp3eg"]
+gradient = SubResource("Gradient_0ld40")
+
+[sub_resource type="Curve" id="Curve_dp3eg"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0027855188, 19.999998), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ld40"]
+curve = SubResource("Curve_dp3eg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_muem4"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 9.32
+spread = 92.32
+initial_velocity_min = -14.849999
+initial_velocity_max = 18.6
+gravity = Vector3(0, -20, 0)
+color = Color(0.6127281, 0.32866284, 2.8878452e-07, 1)
+color_ramp = SubResource("GradientTexture1D_dp3eg")
+alpha_curve = SubResource("CurveTexture_muem4")
+emission_curve = SubResource("CurveTexture_0ld40")
+
 [node name="Main" type="Node2D"]
 
 [node name="CRT Shader" type="CanvasLayer" parent="."]
@@ -52,7 +87,7 @@ grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
 visible = false
-z_index = 830
+z_index = 1192
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
 repeat_times = 8
@@ -93,7 +128,6 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
@@ -141,3 +175,12 @@ pickup_sound = ExtResource("17_muem4")
 [node name="Enemy" parent="." node_paths=PackedStringArray("target_body") instance=ExtResource("18_dp3eg")]
 position = Vector2(137, 229)
 target_body = NodePath("../Player")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+z_index = 465
+position = Vector2(355, 45)
+amount = 40
+lifetime = 2.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_muem4")

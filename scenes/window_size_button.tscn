@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqccv4fd67bqc"]
 
-[ext_resource type="Script" uid="uid://de0b81qcxxboy" path="res://scenes/window_size_button.gd" id="1_epotf"]
+[ext_resource type="Script" uid="uid://de0b81qcxxboy" path="res://scripts/window_size_button.gd" id="1_epotf"]
 
 [node name="Window Size Button" type="Control"]
 layout_mode = 3
