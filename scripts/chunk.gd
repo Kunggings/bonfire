@@ -8,12 +8,31 @@ var floor_threshold: float = 0.5
 
 var tiles: Array[Vector2i] = []
 
+static var grass_atlas: Array[Vector2i] = [
+	Vector2i(0,0), Vector2i(1,0), Vector2i(2,0), Vector2i(3,0),
+	Vector2i(4,0), Vector2i(5,0), Vector2i(6,0), Vector2i(7,0),
+
+	Vector2i(0,1), Vector2i(1,1), Vector2i(2,1), Vector2i(3,1),
+	Vector2i(4,1), Vector2i(5,1), Vector2i(6,1), Vector2i(7,1),
+
+	Vector2i(0,2), Vector2i(1,2), Vector2i(2,2), Vector2i(3,2),
+	Vector2i(4,2), Vector2i(5,2), Vector2i(6,2), Vector2i(7,2),
+
+	Vector2i(0,3), Vector2i(1,3), Vector2i(2,3), Vector2i(3,3),
+	Vector2i(4,3), Vector2i(5,3), Vector2i(6,3), Vector2i(7,3),
+]
+
+static var stone_atlas: Array[Vector2i] = [
+	Vector2i(0,4), Vector2i(0,5), Vector2i(0,6), Vector2i(0,7),
+	Vector2i(1,4), Vector2i(1,5), Vector2i(1,6), Vector2i(1,7)
+]
+
 
 func _init(
 	_chunk_pos: Vector2i,
 	_chunk_size: int,
 	_noise: FastNoiseLite,
-	_threshold: float = 0.5
+	_threshold: float = 0.0
 ) -> void:
 	chunk_pos = _chunk_pos
 	chunk_size = _chunk_size
@@ -35,9 +54,9 @@ func generate() -> void:
 			var index = x + y * chunk_size
 
 			if noise_val < floor_threshold:
-				tiles[index] = Vector2i(1, 1)
-			else:
-				tiles[index] = Vector2i(2, 2)
+				tiles[index] = grass_atlas.pick_random()
+			else: 
+				tiles[index] = stone_atlas.pick_random()
 
 	# var label = Label.new()
 	# label.text = "%s, %s" % [chunk_pos.x, chunk_pos.y]

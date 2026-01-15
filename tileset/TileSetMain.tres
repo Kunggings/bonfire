@@ -54,12 +54,10 @@ texture_region_size = Vector2i(32, 32)
 2:6/0 = 0
 3:6/0 = 0
 4:6/0 = 0
-6:6/0 = 0
 1:7/0 = 0
 2:7/0 = 0
 3:7/0 = 0
 4:7/0 = 0
-6:7/0 = 0
 1:9/0 = 0
 2:9/0 = 0
 4:9/0 = 0
@@ -68,6 +66,8 @@ texture_region_size = Vector2i(32, 32)
 2:10/0 = 0
 4:10/0 = 0
 5:10/0 = 0
+6:6/0 = 0
+6:7/0 = 0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q50og"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -314,9 +314,9 @@ texture_region_size = Vector2i(32, 32)
 7:15/0 = 0
 8:15/0 = 0
 9:15/0 = 0
+9:8/0 = 0
 3:7/0 = 0
 3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-9:8/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)

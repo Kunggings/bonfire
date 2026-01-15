@@ -69,7 +69,7 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 	chunk.generate()
 
 	generated_chunks[chunk_pos] = chunk
-	print("%v generated" % chunk_pos)
+	#print("%v generated" % chunk_pos)
 
 
 func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
@@ -96,7 +96,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 			)
 
 	drawn_chunks[chunk_pos] = chunk
-	print("%v drawn" % chunk_pos)
+	#print("%v drawn" % chunk_pos)
 
 
 func remove_chunk(chunk_pos: Vector2i) -> void:
@@ -112,4 +112,4 @@ func remove_chunk(chunk_pos: Vector2i) -> void:
 			erase_cell(tile_pos)
 
 	drawn_chunks.erase(chunk_pos)
-	print("%v removed" % chunk_pos)
+	#print("%v removed" % chunk_pos)
