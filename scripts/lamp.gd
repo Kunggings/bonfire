@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		lamp_light.enabled = true
 
 	var target_energy: float = lerp(0.0, max_energy, health_percent)
-	var target_scale: float = lerp(1.0, max_scale, health_percent)
+	var target_scale: float = lerp(0.0, max_scale, health_percent)
 
 	lamp_light.energy = lerp(
 		lamp_light.energy,
