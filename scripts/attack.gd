@@ -20,7 +20,8 @@ func Enter() -> void:
 	attack_timer.wait_time = attack_duration
 	attack_timer.start()
 	
-	owner.target_body.current_health -= attack_damage 
+	
+	owner.target_body.take_damage(attack_damage)
 
 func Physics_Update(_delta: float) -> void:
 	

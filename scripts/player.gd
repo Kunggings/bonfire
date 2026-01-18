@@ -79,3 +79,7 @@ func drop_item():
 func heal(amount: float) -> void:
 	if held_item is Lamp:
 		current_health = clamp(current_health + amount, 0.0, max_health)
+		
+func take_damage(amount: float) -> void:
+	if $StateMachine.current_state != $StateMachine/DashPlayer:
+		current_health -= amount
