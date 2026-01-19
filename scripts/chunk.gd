@@ -43,7 +43,7 @@ static var objects: Array[Vector2i] = [
 ]
 
 static var plants: Array[Vector2i] = [
-	Vector2i(0,0), Vector2i(5,0), Vector2i(9,0),
+	Vector2i(0,0), #Vector2i(5,0), Vector2i(9,0),
 ]
 
 
@@ -88,7 +88,7 @@ func generate() -> void:
 
 			if floor_noise_val > grass_threshold:
 				tiles[0][index] = grass_atlas.pick_random()
-				if plants_noise_val > 0.3:
+				if plants_noise_val > 0.0:
 					tiles[2][index] = plants.pick_random()
 				
 			elif floor_noise_val < stone_threshold:

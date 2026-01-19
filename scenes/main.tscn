@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=25 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://te7ult85113m" path="res://audio/Squishy Godot/squeaky_toy.wav" id="17_muem4"]
 [ext_resource type="Script" uid="uid://dxyrelcs3xgk" path="res://scripts/chunk.gd" id="18_0ld40"]
 [ext_resource type="PackedScene" uid="uid://cc626wkj1ap57" path="res://scenes/enemy.tscn" id="18_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://cno50jf47k37t" path="res://scenes/rain.tscn" id="19_0ld40"]
 [ext_resource type="Script" uid="uid://dhjbxdlsj1pds" path="res://scripts/chunk_manager.gd" id="19_gqmmt"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
@@ -50,6 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
+visible = false
 z_index = 1192
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -102,6 +104,8 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(335, 216)
 
 [node name="Lamp" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tipki")]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(160, 127)
 player = NodePath("../Player")
 pickup_sound = ExtResource("8_muem4")
@@ -147,3 +151,11 @@ tile_set = ExtResource("10_ya4ey")
 [node name="Temp Chunk" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("18_0ld40")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1200, 500)
+repeat_times = 4
+
+[node name="Rain" parent="Parallax2D" instance=ExtResource("19_0ld40")]
+light_mask = 0
+visibility_layer = 0

@@ -107,7 +107,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 				atlas_coords
 			)
 			
-			if object_atlas_coords:
+			if object_atlas_coords != null:
 				#print("made signage")
 				object.set_cell(
 					tile_pos,
@@ -115,7 +115,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					object_atlas_coords
 				)
 				
-			if plant_atlas_coords:
+			if plant_atlas_coords != null:
 				#print("made plantage")
 				object.set_cell(
 					tile_pos,

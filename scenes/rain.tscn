@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cno50jf47k37t"]
+
+[ext_resource type="Texture2D" uid="uid://djwymri15cth5" path="res://textures/Rain.jpg" id="1_tchf5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tchf5"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1200, 200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0.1, 1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.5
+color = Color(1, 1, 1, 0.6627451)
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5mvay"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 100.0
+direction = Vector3(0, -1, 0)
+spread = 90.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+
+[node name="Rain" type="GPUParticles2D"]
+light_mask = 3
+visibility_layer = 3
+amount = 50
+texture = ExtResource("1_tchf5")
+lifetime = 3.0
+preprocess = 3.0
+speed_scale = 2.0
+randomness = 1.0
+fixed_fps = 15
+visibility_rect = Rect2(-100, -100, 500, 500)
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.14
+trail_sections = 7
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_tchf5")
+
+[node name="Splash" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.09999999999999999
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_5mvay")
