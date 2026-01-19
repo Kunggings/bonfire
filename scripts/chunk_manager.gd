@@ -3,8 +3,13 @@ class_name ChunkManager
 
 @export var chunk_size: int = 4
 @export var floor_noise: FastNoiseLite
+@export var object_noise: FastNoiseLite
+@export var plant_noise: FastNoiseLite
 @export var grass_threshold: float = 0.1
 @export var stone_threshold: float = -0.1
+
+@onready var object: TileMapLayer = $"../Object"
+@onready var plants: TileMapLayer = $"../Plants"
 
 var tile_size := tile_set.tile_size.x
 var chunk_load_radius := 1
@@ -64,6 +69,8 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 		chunk_pos,
 		chunk_size,
 		floor_noise,
+		object_noise,
+		plant_noise,
 		stone_threshold,
 		grass_threshold
 	)
@@ -85,7 +92,9 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 	for y in range(chunk_size):
 		for x in range(chunk_size):
 			var index := x + y * chunk_size
-			var atlas_coords := chunk.tiles[index]
+			var atlas_coords = chunk.tiles[0][index]
+			var object_atlas_coords = chunk.tiles[1][index]
+			var plant_atlas_coords = chunk.tiles[2][index]
 
 			var tile_pos := Vector2i(
 				chunk_origin.x + x,
@@ -97,6 +106,22 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 				tile_map_id,
 				atlas_coords
 			)
+			
+			if object_atlas_coords:
+				print("made signage")
+				object.set_cell(
+					tile_pos,
+					2,
+					object_atlas_coords
+				)
+				
+			if plant_atlas_coords:
+				print("made plantage")
+				object.set_cell(
+					tile_pos,
+					3,
+					plant_atlas_coords
+				)
 
 	drawn_chunks[chunk_pos] = chunk
 	#print("%v drawn" % chunk_pos)
@@ -113,6 +138,7 @@ func remove_chunk(chunk_pos: Vector2i) -> void:
 			)
 
 			erase_cell(tile_pos)
+			object.erase_cell(tile_pos)
 
 	drawn_chunks.erase(chunk_pos)
 	#print("%v removed" % chunk_pos)

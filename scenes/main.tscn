@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene load_steps=24 format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
@@ -30,6 +30,12 @@ height = 16
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yc10j"]
 frequency = 0.032
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dp3eg"]
+frequency = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ld40"]
+frequency = 0.0151
+
 [node name="Main" type="Node2D"]
 
 [node name="CRT Shader" type="CanvasLayer" parent="."]
@@ -44,6 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="."]
+visible = false
 z_index = 1192
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -85,6 +92,7 @@ script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
@@ -128,8 +136,13 @@ tile_set = ExtResource("10_ya4ey")
 script = ExtResource("19_gqmmt")
 chunk_size = 16
 floor_noise = SubResource("FastNoiseLite_yc10j")
+object_noise = SubResource("FastNoiseLite_dp3eg")
+plant_noise = SubResource("FastNoiseLite_0ld40")
 
 [node name="Object" type="TileMapLayer" parent="."]
+tile_set = ExtResource("10_ya4ey")
+
+[node name="Plants" type="TileMapLayer" parent="."]
 tile_set = ExtResource("10_ya4ey")
 
 [node name="Temp Chunk" type="Node" parent="."]
