@@ -1,4 +1,6 @@
 extends Area2D
+class_name Bonfire
+
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
 @export var lit_texture := preload("res://textures/bonfire.png")

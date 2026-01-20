@@ -16,6 +16,7 @@ var chunk_load_radius := 1
 
 var generated_chunks: Dictionary[Vector2i, Chunk] = {}
 var drawn_chunks: Dictionary[Vector2i, Chunk] = {}
+var drawn_bonfires: Dictionary[Vector2i, Bonfire] = {}
 
 @onready var player: Player = $"../Player"
 @onready var player_chunk: Vector2i = world_to_chunk_pos(player.global_position)
@@ -59,7 +60,17 @@ func world_to_chunk_pos(world_pos: Vector2) -> Vector2i:
 		floor(tile_x / chunk_size),
 		floor(tile_y / chunk_size)
 	)
-
+	
+func chunk_to_world_pos(chunk_pos: Vector2i) -> Vector2:
+	return Vector2(
+		chunk_pos.x * chunk_size * tile_size,
+		chunk_pos.y * chunk_size * tile_size
+	)
+func tile_to_world_pos(tile_pos: Vector2i) -> Vector2:
+	return Vector2i(
+		tile_pos.x * tile_size,
+		tile_pos.y * tile_size
+	)
 
 func generate_chunk(chunk_pos: Vector2i) -> void:
 	if generated_chunks.has(chunk_pos):
@@ -95,6 +106,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 			var atlas_coords = chunk.tiles[0][index]
 			var object_atlas_coords = chunk.tiles[1][index]
 			var plant_atlas_coords = chunk.tiles[2][index]
+			var bonfire_here = chunk.bonfires[index]
 
 			var tile_pos := Vector2i(
 				chunk_origin.x + x,
@@ -122,6 +134,19 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					3,
 					plant_atlas_coords
 				)
+				
+			if bonfire_here:
+				var bonfire_pos:Vector2i = tile_to_world_pos(tile_pos)
+				if drawn_bonfires.has(bonfire_pos):
+					var bonfire_scene: Bonfire = drawn_bonfires[bonfire_pos]
+					bonfire_scene.show()
+					
+				else:
+					var bonfire = load("res://scenes/bonfire.tscn").instantiate()
+					bonfire.position = bonfire_pos 
+					add_child(bonfire)
+					drawn_bonfires[bonfire_pos] = bonfire
+			
 
 	drawn_chunks[chunk_pos] = chunk
 	#print("%v drawn" % chunk_pos)
@@ -139,6 +164,12 @@ func remove_chunk(chunk_pos: Vector2i) -> void:
 
 			erase_cell(tile_pos)
 			object.erase_cell(tile_pos)
+			
+			var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)
+			if drawn_bonfires.has(bonfire_pos):
+				var bonfire_scene: Bonfire = drawn_bonfires[bonfire_pos]
+				bonfire_scene.hide()
+
 
 	drawn_chunks.erase(chunk_pos)
 	#print("%v removed" % chunk_pos)
