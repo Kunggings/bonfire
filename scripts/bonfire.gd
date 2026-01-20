@@ -24,15 +24,17 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is not Player or bonfire_lit:
 		return
-	
-	body.heal(heal_amount)
-	
-	bonfire_lit = true
 
-	gpu_particles_2d.emitting = true
-	
+	body.heal(heal_amount)
+
 	$BonfireLitSound.play()
 	$BonfireSound.play()
 
+	make_lit()
+
+
+func make_lit() -> void:
+	bonfire_lit = true
+	gpu_particles_2d.emitting = true
 	$Sprite.texture = lit_texture
 	$FlameLight.visible = true

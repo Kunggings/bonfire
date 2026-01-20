@@ -6,7 +6,7 @@ var chunk_size: int
 var floor_noise: FastNoiseLite
 var object_noise: FastNoiseLite
 var plant_noise: FastNoiseLite
-var floor_threshold: float 
+var floor_threshold: float
 var grass_threshold: float
 var stone_threshold: float
 
@@ -29,7 +29,7 @@ static var grass_atlas: Array[Vector2i] = [
 
 static var stone_atlas: Array[Vector2i] = [
 	Vector2i(0,4), Vector2i(0,5), Vector2i(0,6),
-	Vector2i(1,4), Vector2i(1,5), Vector2i(1,6), 
+	Vector2i(1,4), Vector2i(1,5), Vector2i(1,6),
 ]
 
 static var broken_atlas: Array[Vector2i] = [
@@ -81,7 +81,7 @@ func generate() -> void:
 	for y in range(chunk_size):
 		for x in range(chunk_size):
 			var world_x = x + chunk_pos.x * chunk_size
-			var world_y = y + chunk_pos.y * chunk_size 
+			var world_y = y + chunk_pos.y * chunk_size
 
 			var floor_noise_val = floor_noise.get_noise_2d(world_x, world_y)
 			var object_noise_val = object_noise.get_noise_2d(world_x, world_y)
@@ -95,20 +95,22 @@ func generate() -> void:
 				if plants_noise_val > 0.3:
 					tiles[2][index] = plants.pick_random()
 					object_plant_placed = true
-				
+
 			elif floor_noise_val < stone_threshold:
 				tiles[0][index] = stone_atlas.pick_random()
 				if object_noise_val > 0.5:
 					tiles[1][index] = objects.pick_random()
 					object_plant_placed = true
-			else: 
+			else:
 				tiles[0][index] = broken_atlas.pick_random()
-				
+
 			if not object_plant_placed:
 				if randf() <= 0.005:
-					bonfires[index] = true
+					bonfires[index] = false
+					print("index")
+					print(index)
 
-		
+
 	# var label = Label.new()
 	# label.text = "%s, %s" % [chunk_pos.x, chunk_pos.y]
 	# label.global_position = chunk_pos * chunk_size * 32

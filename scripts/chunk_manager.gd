@@ -49,7 +49,7 @@ func unload_check() -> void:
 		var delta = drawn_chunks[chunk].chunk_pos - player_chunk
 
 		if abs(delta.x) > 2 or abs(delta.y) > 2:
-			remove_chunk(drawn_chunks[chunk].chunk_pos)
+			unload_chunk(drawn_chunks[chunk].chunk_pos)
 
 
 func world_to_chunk_pos(world_pos: Vector2) -> Vector2i:
@@ -60,17 +60,21 @@ func world_to_chunk_pos(world_pos: Vector2) -> Vector2i:
 		floor(tile_x / chunk_size),
 		floor(tile_y / chunk_size)
 	)
-	
+
+
 func chunk_to_world_pos(chunk_pos: Vector2i) -> Vector2:
 	return Vector2(
 		chunk_pos.x * chunk_size * tile_size,
 		chunk_pos.y * chunk_size * tile_size
 	)
+
+
 func tile_to_world_pos(tile_pos: Vector2i) -> Vector2:
 	return Vector2i(
 		tile_pos.x * tile_size,
 		tile_pos.y * tile_size
 	)
+
 
 func generate_chunk(chunk_pos: Vector2i) -> void:
 	if generated_chunks.has(chunk_pos):
@@ -90,7 +94,6 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 	chunk.generate()
 
 	generated_chunks[chunk_pos] = chunk
-	#print("%v generated" % chunk_pos)
 
 
 func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
@@ -106,7 +109,6 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 			var atlas_coords = chunk.tiles[0][index]
 			var object_atlas_coords = chunk.tiles[1][index]
 			var plant_atlas_coords = chunk.tiles[2][index]
-			var bonfire_here = chunk.bonfires[index]
 
 			var tile_pos := Vector2i(
 				chunk_origin.x + x,
@@ -118,7 +120,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 				tile_map_id,
 				atlas_coords
 			)
-			
+
 			if object_atlas_coords != null:
 				#print("made signage")
 				object.set_cell(
@@ -126,7 +128,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					2,
 					object_atlas_coords
 				)
-				
+
 			if plant_atlas_coords != null:
 				#print("made plantage")
 				object.set_cell(
@@ -134,25 +136,23 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					3,
 					plant_atlas_coords
 				)
-				
-			if bonfire_here:
-				var bonfire_pos:Vector2i = tile_to_world_pos(tile_pos)
-				if drawn_bonfires.has(bonfire_pos):
-					var bonfire_scene: Bonfire = drawn_bonfires[bonfire_pos]
-					bonfire_scene.show()
-					
-				else:
-					var bonfire = load("res://scenes/bonfire.tscn").instantiate()
-					bonfire.position = bonfire_pos 
-					add_child(bonfire)
-					drawn_bonfires[bonfire_pos] = bonfire
-			
+
+			if chunk.bonfires[index] != null:
+				var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)
+				var bonfire = load("res://scenes/bonfire.tscn").instantiate()
+
+				bonfire.position = bonfire_pos
+
+				add_child(bonfire)
+				if chunk.bonfires[index]:
+					bonfire.make_lit()
+
+				drawn_bonfires[bonfire_pos] = bonfire
 
 	drawn_chunks[chunk_pos] = chunk
-	#print("%v drawn" % chunk_pos)
 
 
-func remove_chunk(chunk_pos: Vector2i) -> void:
+func unload_chunk(chunk_pos: Vector2i) -> void:
 	var chunk_origin := chunk_pos * chunk_size
 
 	for y in range(chunk_size):
@@ -164,12 +164,12 @@ func remove_chunk(chunk_pos: Vector2i) -> void:
 
 			erase_cell(tile_pos)
 			object.erase_cell(tile_pos)
-			
+
 			var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)
 			if drawn_bonfires.has(bonfire_pos):
-				var bonfire_scene: Bonfire = drawn_bonfires[bonfire_pos]
-				bonfire_scene.hide()
+				var chunk: Chunk = drawn_chunks[chunk_pos]
+				chunk.bonfires[x + y * chunk_size] = drawn_bonfires[bonfire_pos].bonfire_lit
 
+				drawn_bonfires[bonfire_pos].queue_free()
 
 	drawn_chunks.erase(chunk_pos)
-	#print("%v removed" % chunk_pos)
