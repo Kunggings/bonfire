@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://bdp1a2tm8i0br"]
+[gd_resource type="TileSet" format=3 uid="uid://bdp1a2tm8i0br"]
 
 [ext_resource type="Texture2D" uid="uid://p2ksok348wtt" path="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Wall.png" id="1_0vybm"]
 [ext_resource type="Texture2D" uid="uid://3xvtuajexbhg" path="res://textures/tilemap/Pixel Art Top Down - Basic v1.2.2/Texture/TX Tileset Grass.png" id="1_q50og"]

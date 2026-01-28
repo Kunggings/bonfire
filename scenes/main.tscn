@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b66yo8cfbh81s"]
+[gd_scene format=3 uid="uid://b66yo8cfbh81s"]
 
 [ext_resource type="PackedScene" uid="uid://dcb3isip6kqtw" path="res://scenes/player.tscn" id="1_tefeu"]
 [ext_resource type="Material" uid="uid://dx0d70cs81u2" path="res://materials/fog.tres" id="1_ya4ey"]
@@ -35,12 +35,48 @@ frequency = 1.0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0ld40"]
 frequency = 0.0151
 
-[node name="Main" type="Node2D"]
+[sub_resource type="GDScript" id="GDScript_muem4"]
+script/source = "extends Node
 
-[node name="CRT Shader" type="CanvasLayer" parent="."]
+var total_enemies: int = 0
+
+@export var max_enemies: int = 20
+@export var min_spawn_dis: int = 300
+@export var max_spawn_dis: int = 500
+@export var player: Player
+@export var enemy_spawn_rate: float = 2.0
+
+@onready var enemy_spawn_timer: Timer = $\"Enemy Spawn Timer\"
+
+func _ready() -> void:
+	enemy_spawn_timer.wait_time = enemy_spawn_rate
+	enemy_spawn_timer.timeout.connect(spawn_enemy)
+	enemy_spawn_timer.start()
+
+func spawn_enemy():
+	if total_enemies >= max_enemies:
+		return
+
+	total_enemies += 1
+
+	var dir := Vector2.RIGHT.rotated(randf_range(0.0, TAU))
+	var distance := randf_range(min_spawn_dis, max_spawn_dis)
+	var spawn_location := player.position + dir * distance
+
+	var enemy = preload(\"res://scenes/enemy.tscn\").instantiate()
+	enemy.position = spawn_location
+	enemy.target_body = player
+
+	print(\"spawned enemy\", spawn_location)
+	add_child(enemy)
+"
+
+[node name="Main" type="Node2D" unique_id=1343661083]
+
+[node name="CRT Shader" type="CanvasLayer" parent="." unique_id=845059995]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CRT Shader"]
+[node name="ColorRect" type="ColorRect" parent="CRT Shader" unique_id=807921904]
 material = ExtResource("12_eb6dy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,14 +84,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Fog" type="Parallax2D" parent="."]
+[node name="Fog" type="Parallax2D" parent="." unique_id=1271972548]
 visible = false
 z_index = 1192
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
 repeat_times = 8
 
-[node name="FogColorRect" type="ColorRect" parent="Fog"]
+[node name="FogColorRect" type="ColorRect" parent="Fog" unique_id=1987530357]
 z_index = 490
 material = ExtResource("1_ya4ey")
 anchors_preset = 15
@@ -70,15 +106,15 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=517428473]
 
-[node name="FPS Counter" type="Label" parent="UI"]
+[node name="FPS Counter" type="Label" parent="UI" unique_id=501983312]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("3_tipki")
 metadata/_edit_use_anchors_ = true
 
-[node name="ProgressBar" type="TextureProgressBar" parent="UI"]
+[node name="ProgressBar" type="TextureProgressBar" parent="UI" unique_id=1922176095]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -90,17 +126,17 @@ texture_progress = SubResource("GradientTexture2D_272bh")
 script = ExtResource("4_85g3d")
 player = NodePath("../../Player")
 
-[node name="Darkness" type="CanvasModulate" parent="."]
+[node name="Darkness" type="CanvasModulate" parent="." unique_id=1202647671]
 visible = false
 z_index = 99
 color = Color(0, 0, 0, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_tefeu")]
+[node name="Player" parent="." unique_id=1342705443 instance=ExtResource("1_tefeu")]
 z_index = 2
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 
-[node name="Lamp" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tipki")]
+[node name="Lamp" parent="." unique_id=1345065432 node_paths=PackedStringArray("player") instance=ExtResource("8_tipki")]
 light_mask = 3
 visibility_layer = 3
 position = Vector2(160, 127)
@@ -108,12 +144,12 @@ player = NodePath("../Player")
 pickup_sound = ExtResource("8_muem4")
 putdown_sound = ExtResource("9_dp3eg")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1224471628]
 stream = ExtResource("9_85g3d")
 volume_db = -23.0
 autoplay = true
 
-[node name="Squishy Godot" parent="." instance=ExtResource("13_trceg")]
+[node name="Squishy Godot" parent="." unique_id=271983101 instance=ExtResource("13_trceg")]
 z_index = 1
 position = Vector2(-103, -5)
 collision_layer = 8
@@ -121,32 +157,39 @@ collision_mask = 0
 script = ExtResource("16_jbj1t")
 pickup_sound = ExtResource("17_muem4")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target_body") instance=ExtResource("18_dp3eg")]
+[node name="Enemy" parent="." unique_id=748327997 node_paths=PackedStringArray("target_body") instance=ExtResource("18_dp3eg")]
 z_index = 1
 position = Vector2(214, 12)
 target_body = NodePath("../Player")
 
-[node name="Chunk Manager" type="TileMapLayer" parent="."]
+[node name="Chunk Manager" type="TileMapLayer" parent="." unique_id=134610321]
 tile_set = ExtResource("10_ya4ey")
 script = ExtResource("19_gqmmt")
+chunk_size = 32
 floor_noise = SubResource("FastNoiseLite_yc10j")
 object_noise = SubResource("FastNoiseLite_dp3eg")
 plant_noise = SubResource("FastNoiseLite_0ld40")
 
-[node name="Object" type="TileMapLayer" parent="."]
+[node name="Object" type="TileMapLayer" parent="." unique_id=1757402506]
 tile_set = ExtResource("10_ya4ey")
 
-[node name="Plants" type="TileMapLayer" parent="."]
+[node name="Plants" type="TileMapLayer" parent="." unique_id=1085733974]
 tile_set = ExtResource("10_ya4ey")
 
-[node name="Temp Chunk" type="Node" parent="."]
+[node name="Temp Chunk" type="Node" parent="." unique_id=952894787]
 process_mode = 4
 script = ExtResource("18_0ld40")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=65791160]
 repeat_size = Vector2(1200, 500)
 repeat_times = 4
 
-[node name="Rain" parent="Parallax2D" instance=ExtResource("19_0ld40")]
+[node name="Rain" parent="Parallax2D" unique_id=1949516164 instance=ExtResource("19_0ld40")]
 light_mask = 0
 visibility_layer = 0
+
+[node name="Enemy Manager" type="Node" parent="." unique_id=1796492054 node_paths=PackedStringArray("player")]
+script = SubResource("GDScript_muem4")
+player = NodePath("../Player")
+
+[node name="Enemy Spawn Timer" type="Timer" parent="Enemy Manager" unique_id=269391853]

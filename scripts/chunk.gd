@@ -107,8 +107,8 @@ func generate() -> void:
 			if not object_plant_placed:
 				if randf() <= 0.005:
 					bonfires[index] = false
-					print("index")
-					print(index)
+					#print("index")
+					#print(index)
 
 
 	# var label = Label.new()
