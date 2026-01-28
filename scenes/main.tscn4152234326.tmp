@@ -163,8 +163,6 @@ chunk_size = 32
 floor_noise = SubResource("FastNoiseLite_yc10j")
 object_noise = SubResource("FastNoiseLite_dp3eg")
 plant_noise = SubResource("FastNoiseLite_0ld40")
-grass_threshold = null
-stone_threshold = null
 
 [node name="Object" type="TileMapLayer" parent="." unique_id=1757402506]
 tile_set = ExtResource("10_ya4ey")

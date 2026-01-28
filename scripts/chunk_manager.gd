@@ -131,11 +131,12 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 
 			if plant_atlas_coords != null:
 				#print("made plantage")
-				object.set_cell(
+				plants.set_cell(
 					tile_pos,
 					3,
 					plant_atlas_coords
 				)
+				tile_pos.set_navigation_polygon(0, null)
 
 			if chunk.bonfires[index] != null:
 				var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)

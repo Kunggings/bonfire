@@ -68,6 +68,12 @@ Dash={
 2d_physics/layer_2="Border"
 2d_physics/layer_3="Fire"
 2d_physics/layer_4="Hold"
+2d_physics/layer_5="Enemy"
+
+[physics]
+
+2d/run_on_separate_thread=true
+2d/solver/solver_iterations=8
 
 [rendering]
 
