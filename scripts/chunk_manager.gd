@@ -141,7 +141,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 				var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)
 				var bonfire = load("res://scenes/bonfire.tscn").instantiate()
 
-				bonfire.position = bonfire_pos
+				bonfire.position = bonfire_pos + Vector2i(16,16)
 
 				add_child(bonfire)
 				if chunk.bonfires[index]:
@@ -180,6 +180,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 		object.get_cell_source_id(coords) != -1
 		or plants.get_cell_source_id(coords) != -1
 	)
+
 
 func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
 	if (
