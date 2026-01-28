@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cc626wkj1ap57"]
+[gd_scene format=3 uid="uid://cc626wkj1ap57"]
 
 [ext_resource type="Script" uid="uid://c4agf765b1heh" path="res://scripts/enemy.gd" id="1_8lm2t"]
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_j526r"]
@@ -183,79 +183,80 @@ polygon = PackedVector2Array(-5, -15, -8, -7, -8, 8, -6, 12, 8, 12, 11, 9, 12, -
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vg71"]
 radius = 150.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" unique_id=1902059419]
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_8lm2t")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1723135378]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_2sbpf")
 animation = &"Attack"
 autoplay = "Idle"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1351939551]
 visible = false
 modulate = Color(0.6715297, 5.2173735e-05, 0.535144, 1)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_j526r")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=67859647]
 path_postprocessing = 1
+debug_enabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1651643649]
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_8lm2t")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1054241740]
 occluder = SubResource("OccluderPolygon2D_h04x7")
 
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1601745078]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=756358167]
 shape = SubResource("CircleShape2D_2vg71")
 
-[node name="LineOfSight" type="RayCast2D" parent="."]
+[node name="LineOfSight" type="RayCast2D" parent="." unique_id=2072817766]
 target_position = Vector2(100, 0)
 collide_with_areas = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1301121752 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_vs03u")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state", "wander_state")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=2051515291 node_paths=PackedStringArray("follow_state", "wander_state")]
 script = ExtResource("4_3sl18")
 follow_state = NodePath("../Follow")
 wander_state = NodePath("../Wander")
 
-[node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
+[node name="IdleTimer" type="Timer" parent="StateMachine/Idle" unique_id=1678060]
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("lose_state", "attack_state")]
+[node name="Follow" type="Node" parent="StateMachine" unique_id=1653019914 node_paths=PackedStringArray("lose_state", "attack_state")]
 script = ExtResource("5_nkmuh")
 lose_state = NodePath("../Search")
 attack_state = NodePath("../Attack")
 
-[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "follow_state", "wander_state")]
+[node name="Wander" type="Node" parent="StateMachine" unique_id=900181099 node_paths=PackedStringArray("idle_state", "follow_state", "wander_state")]
 script = ExtResource("6_3sl18")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 wander_state = NodePath(".")
 wander_percentage = 0.2
 
-[node name="Search" type="Node" parent="StateMachine" node_paths=PackedStringArray("arrived_state", "follow_state")]
+[node name="Search" type="Node" parent="StateMachine" unique_id=601534306 node_paths=PackedStringArray("arrived_state", "follow_state")]
 script = ExtResource("7_vs03u")
 arrived_state = NodePath("../Wander")
 follow_state = NodePath("../Follow")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "follow")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=864526262 node_paths=PackedStringArray("idle", "follow")]
 script = ExtResource("8_md484")
 idle = NodePath("../Idle")
 follow = NodePath("../Follow")
 
-[node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
+[node name="AttackTimer" type="Timer" parent="StateMachine/Attack" unique_id=649438071]
 
-[node name="State Label" type="Label" parent="."]
+[node name="State Label" type="Label" parent="." unique_id=523362188]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -266,12 +267,12 @@ offset_bottom = -34.0
 grow_horizontal = 2
 script = ExtResource("9_ipns3")
 
-[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="." unique_id=484345894]
 stream = ExtResource("13_wtq4b")
 volume_db = 10.0
 max_distance = 500.0
 parameters/looping = true
 
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=1150487387]
 stream = ExtResource("14_j0cyh")
 max_distance = 300.0
