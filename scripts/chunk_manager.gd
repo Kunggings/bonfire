@@ -22,8 +22,8 @@ var drawn_bonfires: Dictionary[Vector2i, Bonfire] = {}
 @onready var player_chunk: Vector2i = world_to_chunk_pos(player.global_position)
 var prev_player_chunk := Vector2i.MAX
 
-
 func _physics_process(_delta: float) -> void:
+	
 	player_chunk = world_to_chunk_pos(player.global_position)
 
 	if prev_player_chunk != player_chunk:
@@ -136,7 +136,6 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					3,
 					plant_atlas_coords
 				)
-				tile_pos.set_navigation_polygon(0, null)
 
 			if chunk.bonfires[index] != null:
 				var bonfire_pos: Vector2i = tile_to_world_pos(tile_pos)
@@ -174,3 +173,17 @@ func unload_chunk(chunk_pos: Vector2i) -> void:
 				drawn_bonfires[bonfire_pos].queue_free()
 
 	drawn_chunks.erase(chunk_pos)
+
+
+func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+	return (
+		object.get_cell_source_id(coords) != -1
+		or plants.get_cell_source_id(coords) != -1
+	)
+
+func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
+	if (
+		object.get_cell_source_id(coords) != -1
+		or plants.get_cell_source_id(coords) != -1
+	):
+		tile_data.set_navigation_polygon(0, null)
