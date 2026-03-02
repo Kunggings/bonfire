@@ -66,7 +66,7 @@ func spawn_enemy():
 	enemy.position = spawn_location
 	enemy.target_body = player
 
-	print(\"spawned enemy\", spawn_location)
+	#print(\"spawned enemy\", spawn_location)
 	add_child(enemy)
 "
 
@@ -84,7 +84,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fog" type="Parallax2D" parent="." unique_id=1271972548]
-visible = false
 z_index = 1192
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(1152, 648)
@@ -167,6 +166,9 @@ plant_noise = SubResource("FastNoiseLite_0ld40")
 [node name="Object" type="TileMapLayer" parent="." unique_id=1757402506]
 tile_set = ExtResource("10_ya4ey")
 
+[node name="Structure" type="TileMapLayer" parent="." unique_id=774844703]
+tile_set = ExtResource("10_ya4ey")
+
 [node name="Plants" type="TileMapLayer" parent="." unique_id=1085733974]
 tile_set = ExtResource("10_ya4ey")
 
@@ -184,7 +186,7 @@ visibility_layer = 0
 
 [node name="Enemy Manager" type="Node" parent="." unique_id=1796492054 node_paths=PackedStringArray("player")]
 script = SubResource("GDScript_muem4")
-max_enemies = 30
+max_enemies = 5
 player = NodePath("../Player")
 enemy_spawn_rate = 0.5
 

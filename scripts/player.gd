@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var move_speed: float = 50.0
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var light_occluder_2d: LightOccluder2D = $LightOccluder2D
 
 @export var max_health: float = 100.0
 @export var current_health: float = 100.0
@@ -36,8 +37,12 @@ func _physics_process(_delta: float) -> void:
 	
 	if velocity.x < 0:
 		animation.flip_h = true
+		light_occluder_2d.scale = Vector2(-3, 3)
+		light_occluder_2d.position = Vector2(-5,0)
 	elif velocity.x > 0:
 		animation.flip_h = false
+		light_occluder_2d.scale = Vector2(3, 3)
+		light_occluder_2d.position = Vector2(5,0)
 		
 	move_and_slide()
 

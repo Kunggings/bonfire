@@ -10,6 +10,8 @@ class_name ChunkManager
 
 @onready var object: TileMapLayer = $"../Object"
 @onready var plants: TileMapLayer = $"../Plants"
+@onready var structure: TileMapLayer = $"../Structure"
+
 
 var tile_size := tile_set.tile_size.x
 var chunk_load_radius := 1
@@ -109,6 +111,7 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 			var atlas_coords = chunk.tiles[0][index]
 			var object_atlas_coords = chunk.tiles[1][index]
 			var plant_atlas_coords = chunk.tiles[2][index]
+			var structure_atlas_coords = chunk.tiles[3][index]
 
 			var tile_pos := Vector2i(
 				chunk_origin.x + x,
@@ -135,6 +138,13 @@ func draw_chunk(chunk_pos: Vector2i, tile_map_id: int) -> void:
 					tile_pos,
 					3,
 					plant_atlas_coords
+				)
+				
+			if structure_atlas_coords != null:
+				structure.set_cell(
+					tile_pos,
+					4,
+					structure_atlas_coords
 				)
 
 			if chunk.bonfires[index] != null:

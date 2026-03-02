@@ -47,6 +47,19 @@ static var plants: Array[Vector2i] = [
 	Vector2i(0,0), Vector2i(5,0), Vector2i(9,0),
 ]
 
+static var structure: Array = [	
+	[ Vector2i(1,0), Vector2i(2,0), Vector2i(3,0), Vector2i(4,0) ], # top
+	[ Vector2i(5,0), Vector2i(5,1), Vector2i(5,2), Vector2i(5,3) ], # right
+	[ Vector2i(1,4), Vector2i(2,4), Vector2i(3,4), Vector2i(4,4) ], # bottom
+	[ Vector2i(0,0), Vector2i(0,1), Vector2i(0,2), Vector2i(0,3) ], # left
+	[ Vector2i(6,2), Vector2i(7,2), Vector2i(8,2), Vector2i(9,2),
+	  Vector2i(6,1), Vector2i(7,1), Vector2i(8,1), Vector2i(9,1), 
+	  Vector2i(6,0), Vector2i(7,0), Vector2i(8,0), Vector2i(9,0) ], # middle
+	[ Vector2i(5,4) ], # bottom-right corner
+	[ Vector2i(0,4) ]  # bottom-left corner
+]
+
+
 
 func _init(
 	_chunk_pos: Vector2i,
@@ -68,6 +81,7 @@ func _init(
 		[], # floor layer
 		[],  # object layer
 		[], # plant layer
+		[]  # structure layer
 	]
 	bonfires = []
 
@@ -76,6 +90,7 @@ func generate() -> void:
 	tiles[0].resize(chunk_size * chunk_size)
 	tiles[1].resize(chunk_size * chunk_size)
 	tiles[2].resize(chunk_size * chunk_size)
+	tiles[3].resize(chunk_size * chunk_size)
 	bonfires.resize(chunk_size * chunk_size)
 
 	for y in range(chunk_size):
@@ -109,8 +124,43 @@ func generate() -> void:
 					bonfires[index] = false
 					#print("index")
 					#print(index)
+					
+	structure_generate()
+	
 
+func structure_generate() -> void:
+	var size := randi_range(3, 8)
+	var origin := Vector2i(
+		randi_range(0, chunk_size - size),
+		randi_range(0, chunk_size - size)
+	)
 
+	for local_y in range(size):
+		for local_x in range(size):
+			var tile_pos := origin + Vector2i(local_x, local_y)
+			var index := tile_pos.x + tile_pos.y * chunk_size
+
+			var is_left   := local_x == 0
+			var is_right  := local_x == size - 1
+			var is_top    := local_y == 0
+			var is_bottom := local_y == size - 1
+
+			if is_left and is_bottom:
+				tiles[3][index] = structure[6][0] # bottom-left
+			elif is_right and is_bottom:
+				tiles[3][index] = structure[5][0] # bottom-right
+			elif is_right:
+				tiles[3][index] = structure[1].pick_random() # right edge
+			elif is_bottom:
+				tiles[3][index] = structure[2].pick_random() # bottom edge
+			elif is_left:
+				tiles[3][index] = structure[3].pick_random() # left edge
+			elif is_top:
+				tiles[3][index] = structure[0].pick_random() # top edge
+			else:
+				tiles[3][index] = structure[4].pick_random() # interior
+
+				
 	# var label = Label.new()
 	# label.text = "%s, %s" % [chunk_pos.x, chunk_pos.y]
 	# label.global_position = chunk_pos * chunk_size * 32

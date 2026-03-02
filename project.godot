@@ -22,6 +22,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 buses/default_bus_layout="res://audio/bus/default_bus_layout.tres"
 
+[dotnet]
+
+project/assembly_name="bonfire"
+
 [input]
 
 Up={

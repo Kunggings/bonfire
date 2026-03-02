@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dcb3isip6kqtw"]
+[gd_scene format=3 uid="uid://dcb3isip6kqtw"]
 
 [ext_resource type="Texture2D" uid="uid://xy7j0ewyse8" path="res://textures/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://42xhyslebbfw" path="res://scripts/player.gd" id="1_tuyoq"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b70w8ev03xb0s" path="res://scripts/death.gd" id="12_oprun"]
 [ext_resource type="AudioStream" uid="uid://s17ybydaaij" path="res://audio/Character/running-on-dirt-87203.mp3" id="13_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://citnp3ltg2js2" path="res://audio/Character/footsteps-dirt-gravel-6823.mp3" id="13_jej6c"]
+[ext_resource type="Texture2D" uid="uid://c4d7wabob5sgk" path="res://textures/Soldier-Idle.png" id="16_a8ls1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7dm0k"]
 
@@ -238,9 +239,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oul6g"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qfm1y"]
 cull_mode = 1
-polygon = PackedVector2Array(-14, -22, -15, 8, -5, 17, 3, 17, 10, 17, 15, 9, 15, -6, 11, -26, 2, -31)
+polygon = PackedVector2Array(-2.5, -11, -2.5, -10, -3.5, -10, -3.5, -9, -4.5, -9, -4.5, -8, -5.5, -8, -5.5, -7, -6.5, -7, -6.5, -5, -8.5, -5, -8.5, -4, -9.5, -4, -9.5, -3, -10.5, -3, -10.5, -1, -9.5, -1, -9.5, 0, -8.5, 0, -8.5, 1, -7.5, 1, -7.5, 4, -6.5, 4, -6.5, 5, -4.5, 5, -4.5, 7, -1.5, 7, -1.5, 6, -0.5, 6, -0.5, 7, 2.5, 7, 2.5, 5, 3.5, 5, 3.5, 4, 4.5, 4, 4.5, 2, 3.5, 2, 3.5, 0, 2.5, 0, 2.5, -1, 3.5, -1, 3.5, -2, 4.5, -2, 4.5, -4, 3.5, -4, 3.5, -8, 2.5, -8, 2.5, -9, 1.5, -9, 1.5, -10, 0.5, -10, 0.5, -11)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n0leu"]
 radius = 124.004036
@@ -254,80 +255,83 @@ gradient = SubResource("Gradient_oprun")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1059595503]
 collision_mask = 6
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_tuyoq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=610768679]
 shape = SubResource("CircleShape2D_7dm0k")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2147411200]
 visible = false
 texture = ExtResource("1_4flbx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2104155453]
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_jc3p3")
 animation = &"Dash"
 autoplay = "Idle"
 frame_progress = 0.6603446
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_oul6g")
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=771337426]
+position = Vector2(5, 0)
+scale = Vector2(3, 3)
+occluder = SubResource("OccluderPolygon2D_qfm1y")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1172919757]
 top_level = true
 position_smoothing_enabled = true
 script = ExtResource("3_tuyoq")
 zoom_speed = 1.5
 
-[node name="HealthDrainTimer" type="Timer" parent="."]
+[node name="HealthDrainTimer" type="Timer" parent="." unique_id=596655118]
 autostart = true
 
-[node name="Hold-Area2D" type="Area2D" parent="."]
+[node name="Hold-Area2D" type="Area2D" parent="." unique_id=1475801278]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hold-Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hold-Area2D" unique_id=53049186]
 shape = SubResource("CircleShape2D_n0leu")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=369868203 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_qlg0r")
 initial_state = NodePath("IdlePlayer")
 
-[node name="IdlePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("move", "death")]
+[node name="IdlePlayer" type="Node" parent="StateMachine" unique_id=1808071681 node_paths=PackedStringArray("move", "death")]
 script = ExtResource("4_tuyoq")
 move = NodePath("../MovePlayer")
 death = NodePath("../Death")
 
-[node name="MovePlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "sprint", "dash", "death")]
+[node name="MovePlayer" type="Node" parent="StateMachine" unique_id=8725691 node_paths=PackedStringArray("idle", "sprint", "dash", "death")]
 script = ExtResource("5_qlg0r")
 idle = NodePath("../IdlePlayer")
 sprint = NodePath("../SprintPlayer")
 dash = NodePath("../DashPlayer")
 death = NodePath("../Death")
 
-[node name="SprintPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "dash", "death")]
+[node name="SprintPlayer" type="Node" parent="StateMachine" unique_id=442600254 node_paths=PackedStringArray("idle", "dash", "death")]
 script = ExtResource("7_fjrip")
 idle = NodePath("../IdlePlayer")
 dash = NodePath("../DashPlayer")
 death = NodePath("../Death")
 
-[node name="DashPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("return_state", "death")]
+[node name="DashPlayer" type="Node" parent="StateMachine" unique_id=165545830 node_paths=PackedStringArray("return_state", "death")]
 script = ExtResource("8_ur7pv")
 return_state = NodePath("../IdlePlayer")
 death = NodePath("../Death")
 
-[node name="DashTimer" type="Timer" parent="StateMachine/DashPlayer"]
+[node name="DashTimer" type="Timer" parent="StateMachine/DashPlayer" unique_id=1439438836]
 
-[node name="Death" type="Node" parent="StateMachine"]
+[node name="Death" type="Node" parent="StateMachine" unique_id=13836547]
 script = ExtResource("12_oprun")
 
-[node name="DeathTimer" type="Timer" parent="StateMachine/Death"]
+[node name="DeathTimer" type="Timer" parent="StateMachine/Death" unique_id=90220527]
 
-[node name="State Label" type="Label" parent="."]
+[node name="State Label" type="Label" parent="." unique_id=1796292189]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -338,16 +342,23 @@ offset_bottom = -34.0
 grow_horizontal = 2
 script = ExtResource("8_smehm")
 
-[node name="RunSound" type="AudioStreamPlayer2D" parent="."]
+[node name="RunSound" type="AudioStreamPlayer2D" parent="." unique_id=83332015]
 stream = ExtResource("13_f1ej7")
 parameters/looping = true
 
-[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="." unique_id=987915643]
 stream = ExtResource("13_jej6c")
 parameters/looping = true
 
-[node name="Player Light" type="PointLight2D" parent="."]
+[node name="Player Light" type="PointLight2D" parent="." unique_id=191921818]
 color = Color(1, 1, 1, 0.047058824)
 energy = 3.0
 texture = SubResource("GradientTexture2D_a8ls1")
 texture_scale = 5.5
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1561433080]
+visible = false
+position = Vector2(5.999999, 0)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("16_a8ls1")
+flip_h = true

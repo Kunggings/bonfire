@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4fixe7ebhwoh"
-path="res://.godot/imported/Dungeon_Tileset.png-31b135c51cfcc6fa01d919a87536a53c.ctex"
+uid="uid://c4d7wabob5sgk"
+path="res://.godot/imported/Soldier-Idle.png-59ae175277dbe575a7a1411fea741ab5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tilemap/Dungeon_Tileset.png"
-dest_files=["res://.godot/imported/Dungeon_Tileset.png-31b135c51cfcc6fa01d919a87536a53c.ctex"]
+source_file="res://textures/Soldier-Idle.png"
+dest_files=["res://.godot/imported/Soldier-Idle.png-59ae175277dbe575a7a1411fea741ab5.ctex"]
 
 [params]
 
